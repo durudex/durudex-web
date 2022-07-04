@@ -1,0 +1,10 @@
+{
+  "name": "durudex-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Durudex web app",
+  "scripts": {
+    "dev": "cd packages/app ; pnpm dev ; cd ../"
+  },
+  "license": "???"
+}
