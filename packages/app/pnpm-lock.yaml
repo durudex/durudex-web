@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@durudex-web/test-api': '*'
+  '@durudex-web/test-api': workspace:../test-api
   solid-js: ^1.4.6
   typescript: ^4.7.4
   vite: ^2.9.13

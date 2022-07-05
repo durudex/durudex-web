@@ -2,7 +2,7 @@
  * Copyright (C) 2022 Durudex
  *
  * This source code is licensed under the GNU Affero General Public License
- * license found in the LICENSE file in the root directory of this source tree.
+ * found in the COPYING file in the root directory of this source tree.
  */
 
 import {startApi} from '@durudex-web/test-api'
@@ -15,7 +15,7 @@ if (process.argv[2] !== 'build') {
   startApi(3001)
 }
 
-const relative = (dir: string) => resolve(process.cwd(), dir)
+const relative = dir => resolve(process.cwd(), dir)
 
 export default defineConfig({
   plugins: [solid(), checker({typescript: true})],

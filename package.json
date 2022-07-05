@@ -4,7 +4,7 @@
   "private": true,
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "dev": "vite packages/app",
-    "build": "vite build packages/app"
+    "dev": "pnpm --filter @durudex-web/app... dev",
+    "build": "pnpm --filter @durudex-web/app... build"
   }
 }

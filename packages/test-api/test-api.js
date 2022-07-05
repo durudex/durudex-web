@@ -2,7 +2,7 @@
  * Copyright (C) 2022 Durudex
  *
  * This source code is licensed under the GNU Affero General Public License
- * license found in the LICENSE file in the root directory of this source tree.
+ * found in the COPYING file in the root directory of this source tree.
  */
 
 import {createServer} from 'node:http'
@@ -10,7 +10,7 @@ import cc from 'concolor'
 
 const API_URL = 'https://api.dev.durudex.com/query'
 
-export function startApi(port: number) {
+export function startApi(port) {
   const {close} = createServer((req, res) => {
     console.log(cc.info`\n[api request]\n`)
 
