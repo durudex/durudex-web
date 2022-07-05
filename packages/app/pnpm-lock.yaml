@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@durudex-web/test-api': '*'
   solid-js: ^1.4.6
   typescript: ^4.7.4
   vite: ^2.9.13
@@ -9,6 +10,7 @@ specifiers:
   vitest: ^0.17.0
 
 dependencies:
+  '@durudex-web/test-api': link:../test-api
   solid-js: 1.4.6
   typescript: 4.7.4
   vite: 2.9.13
@@ -486,7 +488,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001363
-      electron-to-chromium: 1.4.177
+      electron-to-chromium: 1.4.179
       node-releases: 2.0.5
       update-browserslist-db: 1.0.4_browserslist@4.21.1
     dev: false
@@ -599,8 +601,8 @@ packages:
       type-detect: 4.0.8
     dev: false
 
-  /electron-to-chromium/1.4.177:
-    resolution: {integrity: sha512-FYPir3NSBEGexSZUEeht81oVhHfLFl6mhUKSkjHN/iB/TwEIt/WHQrqVGfTLN5gQxwJCQkIJBe05eOXjI7omgg==}
+  /electron-to-chromium/1.4.179:
+    resolution: {integrity: sha512-1XeTb/U/8Xgh2YgPOqhakLYsvCcU4U7jUjTMbEnhIJoIWd/Qt3yC8y0cbG+fHzn4zUNF99Ey1xiPf20bwgLO3Q==}
     dev: false
 
   /esbuild-android-64/0.14.48:

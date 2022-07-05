@@ -2,10 +2,9 @@
   "name": "durudex-web",
   "version": "1.0.0",
   "private": true,
-  "description": "Durudex web app",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
-    "dev": "pnpm --filter durudex-web-app...  dev",
-    "build": "pnpm --filter durudex-web-app... build"
-  },
-  "license": "AGPL-3.0-or-later"
+    "dev": "vite packages/app",
+    "build": "vite build packages/app"
+  }
 }

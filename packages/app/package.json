@@ -1,5 +1,5 @@
 {
-  "name": "durudex-web-app",
+  "name": "@durudex-web/app",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,6 +7,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@durudex-web/test-api": "*",
     "solid-js": "^1.4.6",
     "typescript": "^4.7.4",
     "vite": "^2.9.13",

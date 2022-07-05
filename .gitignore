@@ -1,2 +1,4 @@
 dist/
-node_modules
+node_modules/
+.vscode
+.pnpm-debug.log

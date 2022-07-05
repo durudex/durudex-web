@@ -1,0 +1,20 @@
+lockfileVersion: 5.4
+
+patchedDependencies:
+  concolor@1.0.2:
+    hash: bphtnxpyeigmir2d2ffz2q3m3e
+    path: patches/concolor@1.0.2.patch
+
+specifiers:
+  concolor: ^1.0.2
+
+dependencies:
+  concolor: 1.0.2_bphtnxpyeigmir2d2ffz2q3m3e
+
+packages:
+
+  /concolor/1.0.2_bphtnxpyeigmir2d2ffz2q3m3e:
+    resolution: {integrity: sha512-EM1ZsJ2DcUTDqCWC55SDXvqonn7wmmrFQWpLGLIP8FExkZoqqvMYlYYfnUGwLbPrB41Y6K7voYI8jiS3BmszSw==}
+    engines: {node: ^12.9 || 14 || 16}
+    dev: false
+    patched: true

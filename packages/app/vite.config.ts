@@ -5,28 +5,14 @@
  * license found in the LICENSE file in the root directory of this source tree.
  */
 
-import {defineConfig} from 'vite'
-import solid from 'vite-plugin-solid'
-import checker from 'vite-plugin-checker'
+import {startApi} from '@durudex-web/test-api'
 import {resolve} from 'node:path'
-import {createServer} from 'node:http'
+import {defineConfig} from 'vite'
+import checker from 'vite-plugin-checker'
+import solid from 'vite-plugin-solid'
 
-if (process.argv[2] === 'build') {
-  createServer((req, res) => {
-    req.on('data', chunk => {
-      fetch('https://api.dev.durudex.com/query', {
-        body: chunk,
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-      })
-        .then(apiResp => apiResp.json())
-        .then(content => {
-          console.log('[api request]\n')
-          console.dir(content)
-          res.end(JSON.stringify(content))
-        })
-    })
-  }).listen(3001)
+if (process.argv[2] !== 'build') {
+  startApi(3001)
 }
 
 const relative = (dir: string) => resolve(process.cwd(), dir)

@@ -1,0 +1,14 @@
+{
+  "name": "@durudex-web/test-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "test-api.ts",
+  "dependencies": {
+    "concolor": "^1.0.2"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "concolor@1.0.2": "patches/concolor@1.0.2.patch"
+    }
+  }
+}
