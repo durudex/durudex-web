@@ -4,7 +4,8 @@
   "private": true,
   "description": "Durudex web app",
   "scripts": {
-    "dev": "cd packages/app ; pnpm dev ; cd ../"
+    "dev": "pnpm --filter durudex-web-app...  dev",
+    "build": "pnpm --filter durudex-web-app... build"
   },
-  "license": "???"
+  "license": "AGPL-3.0-or-later"
 }
