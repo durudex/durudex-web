@@ -15,17 +15,26 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '$/styles/app.sass'
+
+import '@fontsource/montserrat/400.css'
+import '@fontsource/montserrat/500.css'
+import '@fontsource/montserrat/600.css'
+import '@fontsource/montserrat/700.css'
+
 import {render} from 'solid-js/web'
 import {Router, Routes, Route, hashIntegration} from 'solid-app-router'
 import {NotificationsRoot} from '$/notifications/root'
 import {lazyModule} from '$/lazy-module/lazy-module'
 
 const {AuthHome, SignIn, SignUp} = lazyModule(() => import('$/auth'))
+const {Home} = lazyModule(() => import('$/home/home'))
 
 function App() {
   return (
     <Router source={hashIntegration()}>
       <Routes>
+        <Route path="/" element={() => <Home />} />
         <Route path="/auth">
           <Route path="/" element={() => <AuthHome />} />
           <Route path="/sign-in" element={() => <SignIn />} />

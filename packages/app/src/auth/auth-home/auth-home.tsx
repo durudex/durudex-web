@@ -15,6 +15,23 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {Link} from 'solid-app-router'
+
 export function AuthHome() {
-  return null
+  return (
+    <div class="home flex-center forward-height">
+      <div class="typography">
+        <p>Sign in to an account or create one</p>
+        <ul>
+          <li>
+            <Link href="/auth/sign-in">Sign In</Link>
+          </li>
+          <li>
+            <Link href="/auth/sign-up">Sign Up</Link>
+          </li>
+        </ul>
+        <h3>Auth</h3>
+      </div>
+    </div>
+  )
 }

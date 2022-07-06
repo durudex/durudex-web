@@ -1,0 +1,30 @@
+@use "$/styles/shared" as *
+
+.typography
+  @include column(1rem)
+  ul, ol
+    @include column(.25rem)
+    li
+      margin-left: 2rem
+
+.pad-1
+  padding: 1rem
+
+.justify-center
+  @include justify-center
+.align-center
+  @include align-center
+.flex-center
+  @include flex-center
+
+.row
+  @include row
+
+.column
+  @include column
+
+.full-width
+  width: 100%
+
+.forward-height
+  @include forward-height
