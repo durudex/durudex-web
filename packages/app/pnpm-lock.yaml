@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@durudex-web/test-api': workspace:../test-api
+  solid-app-router: ^0.4.1
   solid-js: ^1.4.6
   typescript: ^4.7.4
   vite: ^2.9.13
@@ -11,6 +12,7 @@ specifiers:
 
 dependencies:
   '@durudex-web/test-api': link:../test-api
+  solid-app-router: 0.4.1_solid-js@1.4.6
   solid-js: 1.4.6
   typescript: 4.7.4
   vite: 2.9.13
@@ -1116,6 +1118,14 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+    dev: false
+
+  /solid-app-router/0.4.1_solid-js@1.4.6:
+    resolution: {integrity: sha512-RKHyFQ+J5lXyE/SoyJVHgTBeBck2etYVJn1/9F7ehlzyD2pIOMqLpNXD1GfWQljHqNdXZBSyE+xB/Cck5l9Q/g==}
+    peerDependencies:
+      solid-js: ^1.3.5
+    dependencies:
+      solid-js: 1.4.6
     dev: false
 
   /solid-js/1.4.6:

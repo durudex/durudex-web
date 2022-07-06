@@ -16,5 +16,25 @@
  */
 
 import {render} from 'solid-js/web'
+import {Router, Routes, Route, hashIntegration} from 'solid-app-router'
+import {NotificationsRoot} from '$/notifications/root'
+import {lazyModule} from '$/lazy-module/lazy-module'
 
-render(() => <>Hello, world!</>, document.body)
+const {AuthHome, SignIn, SignUp} = lazyModule(() => import('$/auth'))
+
+function App() {
+  return (
+    <Router source={hashIntegration()}>
+      <Routes>
+        <Route path="/auth">
+          <Route path="/" element={() => <AuthHome />} />
+          <Route path="/sign-in" element={() => <SignIn />} />
+          <Route path="/sign-up" element={() => <SignUp />} />
+        </Route>
+      </Routes>
+      <NotificationsRoot />
+    </Router>
+  )
+}
+
+render(() => <App />, document.body)
