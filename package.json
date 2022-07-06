@@ -5,6 +5,7 @@
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "dev": "pnpm --filter @durudex-web/app... dev",
-    "build": "pnpm --filter @durudex-web/app... build"
+    "build": "pnpm --filter @durudex-web/app... build",
+    "test": "pnpm --filter @durudex-web/app... test"
   }
 }
