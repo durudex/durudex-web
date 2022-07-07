@@ -1,0 +1,13 @@
+lockfileVersion: 5.4
+
+specifiers:
+  solid-js: ^1.4.6
+
+dependencies:
+  solid-js: 1.4.6
+
+packages:
+
+  /solid-js/1.4.6:
+    resolution: {integrity: sha512-vF0x5qbVCDi8zlEyN92y/i+pS7QNYh3uNvbSyUYDhLifKuYqGcJwGxbH9zzDX5sR8o1ijgzI6BEAXlcR7Mkkjw==}
+    dev: false

@@ -1,0 +1,9 @@
+{
+  "name": "@durudex-web/flow",
+  "version": "1.0.0",
+  "license": "AGPL-3.0-or-later",
+  "main": "flow.ts",
+  "dependencies": {
+    "solid-js": "^1.4.6"
+  }
+}
