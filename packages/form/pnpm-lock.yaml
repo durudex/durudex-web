@@ -1,0 +1,7 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@durudex-web/flow': '*'
+
+dependencies:
+  '@durudex-web/flow': link:../flow
