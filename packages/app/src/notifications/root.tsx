@@ -15,6 +15,8 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '$/notifications/root.sass'
+
 import {Element} from '$/props'
 import {createMutable, For} from '@durudex-web/flow'
 
@@ -28,15 +30,24 @@ export const notifications = createMutable<NotificationProps[]>([])
 
 export function NotificationsRoot() {
   return (
-    <div class="notificationsRoot">
+    <div
+      class="notificationsRoot"
+      classList={{notificationsRoot__visible: !!notifications.length}}
+    >
       <For each={notifications}>{props => <Notification {...props} />}</For>
     </div>
   )
 }
 
 function Notification(props: NotificationProps) {
+  let node!: HTMLDivElement
+
+  // onMount(() => {
+  //   node.animate([{opacity: 0}, {opacity: 1}], 100)
+  // })
+
   return (
-    <div class="notification">
+    <div ref={node} class="notification">
       <div class="notification__title">{props.title}</div>
       <div class="notification__body">{props.body}</div>
       <div class="notification__actions">{props.actions}</div>

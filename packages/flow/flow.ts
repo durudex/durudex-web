@@ -49,5 +49,8 @@ export {
   Show,
   Match,
   Switch,
+  //
+  onMount,
+  onCleanup,
 } from 'solid-js'
 export {createMutable} from 'solid-js/store'

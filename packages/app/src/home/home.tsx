@@ -1,6 +1,26 @@
 import {Link} from 'solid-app-router'
 
+import {showError, showMessage, showNotification} from '$/notifications/api'
+
+let first = true
+
 export function Home() {
+  if (first) {
+    showError('Error!!!!')
+    showMessage('Message title', 'message body')
+    showNotification(close => ({
+      title: <h3>Notification title</h3>,
+      body: 'notification body',
+      actions: (
+        <button class="button full-width" onClick={close}>
+          Dismiss
+        </button>
+      ),
+    }))
+  }
+
+  first = false
+
   return (
     <div class="home flex-center forward-height">
       <div class="typography brutal-container">

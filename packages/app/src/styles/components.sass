@@ -15,46 +15,23 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// theme
+@use "$/styles/shared" as *
 
-$primary: #9104ff
-$primaryDark: #880ae9
-$background: #fff
-$backgroundDark: #eee
-$text: #4f506a
-$danger: #ff0000
-$dangerDark: #da0a0a
+.typography
+  @include column(1rem)
+  ul, ol
+    @include column(.25rem)
+    li
+      margin-left: 2rem
 
-// helpers
-
-@mixin align-center
-  display: flex
-  align-items: center
-
-@mixin justify-center
-  display: flex
-  justify-content: center
-
-@mixin flex-center
-  @include align-center
-  @include justify-center
-
-@mixin row($gap: 0, $reverse: false)
-  display: flex
-  gap: $gap
-  @if $reverse
-    flex-flow: row-reverse
-  @else
-    display: flex
-
-@mixin column($gap: 0, $reverse: false)
-  display: flex
-  gap: $gap
-  @if $reverse
-    flex-flow: column-reverse
-  @else
-    flex-flow: column
-
-@mixin forward-height
-  height: 100%
-  position: relative
+.button
+  padding: .6rem
+  border-radius: .75rem
+  font: inherit
+  font-weight: 800
+  font-size: 1.2rem
+  color: white
+  background-color: $primary
+  border: none
+  &:hover
+    background-color: $primaryDark
