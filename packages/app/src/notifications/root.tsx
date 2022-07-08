@@ -15,6 +15,31 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {Element} from '$/props'
+import {createMutable, For} from '@durudex-web/flow'
+
+export interface NotificationProps {
+  title: Element
+  body: Element
+  actions: Element
+}
+
+export const notifications = createMutable<NotificationProps[]>([])
+
 export function NotificationsRoot() {
-  return <></>
+  return (
+    <div class="notificationsRoot">
+      <For each={notifications}>{props => <Notification {...props} />}</For>
+    </div>
+  )
+}
+
+function Notification(props: NotificationProps) {
+  return (
+    <div class="notification">
+      <div class="notification__title">{props.title}</div>
+      <div class="notification__body">{props.body}</div>
+      <div class="notification__actions">{props.actions}</div>
+    </div>
+  )
 }

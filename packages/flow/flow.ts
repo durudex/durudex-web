@@ -50,3 +50,4 @@ export {
   Match,
   Switch,
 } from 'solid-js'
+export {createMutable} from 'solid-js/store'
