@@ -22,6 +22,6 @@ export {Element}
 export type WithChildren = {children: Element}
 export type WithClass = {class?: string}
 
-export function classes(props: WithClass) {
-  return props.class || ''
+export function classes(props: WithClass, base?: string) {
+  return `${base || ''} ${props.class || ''}`
 }
