@@ -7,8 +7,12 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@durudex-web/test-api": "workspace:../test-api",
+    "@durudex-web/flow": "*",
+    "@durudex-web/form": "*",
+    "@durudex-web/test-api": "*",
     "@fontsource/montserrat": "^4.5.11",
+    "@urql/core": "^2.5.0",
+    "graphql": "^16.5.0",
     "sass": "^1.53.0",
     "solid-app-router": "^0.4.1",
     "solid-js": "^1.4.6",

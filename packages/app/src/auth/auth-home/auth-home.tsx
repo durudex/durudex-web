@@ -20,7 +20,7 @@ import {Link} from 'solid-app-router'
 export function AuthHome() {
   return (
     <div class="home flex-center forward-height">
-      <div class="typography">
+      <div class="typography brutal-container">
         <p>Sign in to an account or create one</p>
         <ul>
           <li>
@@ -31,6 +31,7 @@ export function AuthHome() {
           </li>
         </ul>
         <h3>Auth</h3>
+        <a href="/">Home</a>
       </div>
     </div>
   )

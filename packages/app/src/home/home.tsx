@@ -3,7 +3,7 @@ import {Link} from 'solid-app-router'
 export function Home() {
   return (
     <div class="home flex-center forward-height">
-      <div class="typography">
+      <div class="typography brutal-container">
         <h1>Durudex web app</h1>
         <h2>Durudex web app</h2>
         <h3>Durudex web app</h3>

@@ -17,9 +17,9 @@
 
 import {Channel, createSignal, createMemo} from '@durudex-web/flow'
 
-export class Form<Schema = {}> {
+export class Form<Schema extends {} = {}> {
   private fields = new Map<string, Field>()
-  pending = createSignal(false)
+  pending = createSignal<boolean>(false)
 
   add<K extends keyof Schema>(key: K, value: Field<Schema[K]>) {
     this.fields.set(key as string, value)
@@ -46,6 +46,11 @@ export class Form<Schema = {}> {
 
   isValid() {
     return !this.pending() && !!this.unwrap()
+  }
+
+  assert(): Schema {
+    if (!this.isValid()) throw new Error('Form is invalid')
+    return this.unwrap()!
   }
 
   propagateErrors(rec: Record<string, string>) {
