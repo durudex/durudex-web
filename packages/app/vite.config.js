@@ -35,6 +35,9 @@ export default defineConfig({
       '/dev-api': {
         target: 'http://localhost:3001',
       },
+      '/*': {
+        target: '/',
+      },
     },
   },
   resolve: {alias: {$: relative('src/')}},

@@ -23,7 +23,7 @@ import '@fontsource/montserrat/600.css'
 import '@fontsource/montserrat/700.css'
 
 import {render} from 'solid-js/web'
-import {Router, Routes, Route, hashIntegration} from 'solid-app-router'
+import {Router, Routes, Route} from 'solid-app-router'
 import {NotificationsRoot} from '$/notifications/root'
 import {lazyModule} from '$/lazy-module/lazy-module'
 
@@ -32,7 +32,7 @@ const {Home} = lazyModule(() => import('$/home/home'))
 
 function App() {
   return (
-    <Router source={hashIntegration()}>
+    <Router>
       <Routes>
         <Route path="/" element={() => <Home />} />
         <Route path="/auth">
