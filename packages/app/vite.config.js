@@ -18,8 +18,9 @@
 import {startApi} from '@durudex-web/test-api'
 import {resolve} from 'node:path'
 import {defineConfig} from 'vite'
-import checker from 'vite-plugin-checker'
 import solid from 'vite-plugin-solid'
+import checker from 'vite-plugin-checker'
+import compression from 'vite-plugin-compression'
 
 if (process.argv[2] !== 'build') {
   startApi(3001)
@@ -28,7 +29,11 @@ if (process.argv[2] !== 'build') {
 const relative = dir => resolve(process.cwd(), dir)
 
 export default defineConfig({
-  plugins: [solid(), checker({typescript: true})],
+  plugins: [
+    solid(),
+    checker({typescript: true}),
+    compression({algorithm: 'brotliCompress'}),
+  ],
   build: {},
   server: {
     proxy: {

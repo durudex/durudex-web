@@ -2,6 +2,10 @@ import {Link} from 'solid-app-router'
 
 import {showError, showMessage, showNotification} from '$/notifications/api'
 
+import bavovna from '$/assets/bavovna.png'
+
+import '$/home/home.sass'
+
 let first = true
 
 export function Home() {
@@ -24,7 +28,7 @@ export function Home() {
   return (
     <div class="home flex-center forward-height">
       <div class="typography brutal-container">
-        <h1>Durudex web app</h1>
+        {/* <h1>Durudex web app</h1>
         <h2>Durudex web app</h2>
         <h3>Durudex web app</h3>
         <h4>Durudex web app</h4>
@@ -41,7 +45,11 @@ export function Home() {
           <li>
             <Link href="/auth/sign-up">Sign Up</Link>
           </li>
-        </ul>
+        </ul> */}
+        <figure class="home__figure">
+          <img class="home__img" src={bavovna} />
+          <figcaption class="home__figcaption">Кам'янське</figcaption>
+        </figure>
       </div>
     </div>
   )
