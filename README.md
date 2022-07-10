@@ -17,15 +17,29 @@
 
 ## Modules
 
-- `app`: SolidJS application
-  - `api`: URQL wrappers
-  - `auth`: authentication module
-  - `lazy-module`: less strict SolidJS `lazy`
-  - `props`: functions and types for working with component's props
-  - `notifications`: notifications module
-    - `api`: imperative APIs (`showNotification` etc.)
-    - `root`: notifications' mountpoint
-  
+- [`app`](packages/app): SolidJS application
+  - [`main`](packages/app/src/main.tsx): setup routing and render the application
+  - [`api`](packages/app/api): GraphQL module
+    - [`core`](packages/app/src/api/core.ts): URQL wrappers
+    - [`common`](packages/app/src/api/common.ts): common queries and mutations
+  - [`auth`](packages/app/src/auth): authentication module
+    - [`shared`](packages/app/src/auth/shared.tsx): common auth components etc.
+    - [`sign-in`](packages/app/src/auth/sign-in.tsx)
+    - [`sign-up`](packages/app/src/auth/sign-up.tsx)
+    - [`forgot-password`](packages/app/src/auth/forgot-password.tsx)
+  - [`lazy-module`](packages/app/src/lazy-module): less strict SolidJS `lazy`
+  - [`use`](packages/app/src/use): common hooks
+  - [`props`](packages/app/src/props): functions and types for working with component props
+  - [`notifications`](packages/app/src/notifications): notifications module
+    - [`api`](packages/app/src/notifications/api.tsx): imperative APIs (`showNotification` etc.)
+    - [`root`](packages/app/src/notifications/root.tsx): a component that renders notifications
+  - [`assets`](packages/app/src/assets): static assets
+  - [`styles`](packages/app/src/styles): common Sass styles
+- [`flow`](packages/flow): SolidJS wrappers and re-exports. See more in readme 
+- [`form`](packages/form): abstract reactive forms
+  - [`validator`](packages/form/src/validator.ts): abstract validation
+- [`test-api`](packages/test-api): start a server that proxies Durudex Test API and logs responses to the console
+
 ... work in progress ...
 
 ## ⚠️ License
