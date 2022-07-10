@@ -17,8 +17,45 @@
 
 import {defineQuery, gql} from '$/api/core'
 
-export const signUp = defineQuery('mutation', gql``)
+export const signUp = defineQuery(
+  'mutation',
+  gql`
+    mutation SignUp(
+      $username: String!
+      $email: String!
+      $password: String!
+      $code: Uint64!
+    ) {
+      signUp(
+        input: {
+          username: $username
+          email: $email
+          password: $password
+          code: $code
+        }
+      )
+    }
+  `
+)
 
-export const signIn = defineQuery('mutation', gql``)
+export const signIn = defineQuery(
+  'mutation',
+  gql`
+    mutation SignIn($username: String!, $password: String!) {
+      signIn(input: {username: $username, password: $password})
+    }
+  `
+)
 
-export const forgotPassword = defineQuery('mutation', gql``)
+export const resetPassword = defineQuery(
+  'mutation',
+  gql`
+    mutation ResetPassword(
+      $email: String!
+      $password: String!
+      $code: Uint64!
+    ) {
+      forgotPassword(input: {email: $email, password: $password, code: $code})
+    }
+  `
+)

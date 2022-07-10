@@ -17,4 +17,11 @@
 
 import {defineQuery, gql} from '$/api/core'
 
-export const getVerificationCode = defineQuery('mutation', gql``)
+export const createVerificationCode = defineQuery(
+  'mutation',
+  gql`
+    mutation CreateVerificationCode($email: String!) {
+      createVerifyEmailCode(email: $email)
+    }
+  `
+)
