@@ -24,11 +24,13 @@
     - [`common`](packages/app/src/api/common.ts): common queries and mutations
   - [`auth`](packages/app/src/auth): authentication module
     - [`shared`](packages/app/src/auth/shared.tsx): common auth components etc.
+    - [`auth-home`](packages/app/src/auth/auth-home.tsx) 
     - [`sign-in`](packages/app/src/auth/sign-in.tsx)
     - [`sign-up`](packages/app/src/auth/sign-up.tsx)
     - [`forgot-password`](packages/app/src/auth/forgot-password.tsx)
   - [`lazy-module`](packages/app/src/lazy-module): less strict SolidJS `lazy`
   - [`use`](packages/app/src/use): common hooks
+    - [`body`](packages/app/src/use/body.ts): body-related hooks
   - [`props`](packages/app/src/props): functions and types for working with component props
   - [`notifications`](packages/app/src/notifications): notifications module
     - [`api`](packages/app/src/notifications/api.tsx): imperative APIs (`showNotification` etc.)
@@ -39,6 +41,28 @@
 - [`form`](packages/form): abstract reactive forms
   - [`validator`](packages/form/src/validator.ts): abstract validation
 - [`test-api`](packages/test-api): start a server that proxies Durudex Test API and logs responses to the console
+
+## Technologies
+
+- UI framework: SolidJS with different signals API
+- bundler: Vite
+- test framework: Vitest
+- package manager, monorepo tool: pnpm
+- scripting language: TypeScript (strict)
+- styling language: Sass (indented)
+- GraphQL module: `@urql/core` with custom wrappers
+- platform: Vercel
+
+## Get Involved
+
+Feel free to open issues and pull requests. Join [our Discord](https://discord.gg/4qcXbeVehZ) to discuss Durudex.
+
+To develop Durudex locally: 
+
+1. clone the repo 
+2. install deps: `pnpm install --recursive`
+3. start Vite server: `pnpm dev` or `cd packages/app; pnpm dev; cd ../`
+4. build the app: `pnpm build --recursive`
 
 ... work in progress ...
 
