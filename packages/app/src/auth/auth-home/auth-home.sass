@@ -1,0 +1,37 @@
+/*
+ * Copyright © 2022 Durudex
+ *
+ * This file is part of Durudex: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * Durudex is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+@use "$/styles/shared.sass" as *
+
+.authHome
+  @include flex-center
+  background-image: var(--authHomeBackground)
+  padding: 2rem 1rem
+  @media (max-width: $simplifyBr)
+    .authHome__body
+      height: 100%
+.authHome__body
+  height: 400px
+  @include flex-center
+  @include column(6rem)
+.authHome__logo
+  width: 75%
+.authHome__actions
+  @include column(1rem)
+  width: 100%
+.authHome__action
+  @include buttonOutline

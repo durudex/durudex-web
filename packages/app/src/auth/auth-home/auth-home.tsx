@@ -15,24 +15,32 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '$/auth/auth-home/auth-home.sass'
+
+import logo from '$/assets/logo.png'
+import bg from '$/assets/background/0.jpg'
+
 import {Link} from 'solid-app-router'
 
+import {AuthPage} from '$/auth/shared'
+import {useBodyStyle} from '$/use/body'
+
 export function AuthHome() {
+  useBodyStyle('--authHomeBackground', `url(${bg})`)
+
   return (
-    <div class="home flex-center forward-height">
-      <div class="typography brutal-container">
-        <p>Sign in to an account or create one</p>
-        <ul>
-          <li>
-            <Link href="/auth/sign-in">Sign In</Link>
-          </li>
-          <li>
-            <Link href="/auth/sign-up">Sign Up</Link>
-          </li>
-        </ul>
-        <h3>Auth</h3>
-        <a href="/">Home</a>
+    <AuthPage class="authHome">
+      <div class="authHome__body">
+        <img class="authHome__logo" src={logo} alt="Durudex Logo" />
+        <div class="authHome__actions">
+          <Link class="authHome__action" href="/auth/sign-in">
+            Sign In
+          </Link>
+          <Link class="authHome__action" href="/auth/sign-up">
+            Sign Up
+          </Link>
+        </div>
       </div>
-    </div>
+    </AuthPage>
   )
 }

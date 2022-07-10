@@ -14,3 +14,48 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
+
+import '$/auth/shared.sass'
+
+import {useBodyClass, useBodyStyle} from '$/use/body'
+import {WithChildren, WithClass, classes} from '$/props'
+import durudexLogo from '$/assets/logo.png'
+
+const GRADIENT = 'linear-gradient(245.03deg, #9D1CED 8.14%, #1C24ED 92.58%)'
+
+type AuthPageProps = WithChildren & WithClass
+
+export function AuthPage(props: AuthPageProps) {
+  useBodyClass('withAuthPage')
+  useBodyStyle('background', GRADIENT)
+
+  return <div class={classes(props, 'authPage')}>{props.children}</div>
+}
+
+type AuthScreenProps = AuthPageProps & {
+  title: string
+  paneLeftwards: boolean
+  paneSrc: string
+}
+
+export function AuthScreen(props: AuthScreenProps) {
+  return (
+    <AuthPage class={classes(props, 'authScreen')}>
+      <div class="authScreen__body">
+        <h1 class="authScreen__title">{props.title}</h1>
+        <div class="authScreen__content">{props.children}</div>
+      </div>
+      <div
+        class="authScreen__pane"
+        classList={{authScreen_inverse: props.paneLeftwards}}
+        style={{'background-image': `url(${props.paneSrc})`}}
+      >
+        <img
+          src={durudexLogo}
+          alt="Durudex Logo"
+          class="authScreen__paneLogo"
+        />
+      </div>
+    </AuthPage>
+  )
+}

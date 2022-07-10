@@ -15,10 +15,9 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-@use "sass:map"
+@use "$/styles/shared" as *
 
 @import "$/styles/utils"
-@import "$/styles/components"
 
 *, *::before, *::after
   box-sizing: border-box
@@ -31,7 +30,6 @@
 
 body
   font-family: "Montserrat"
-  // font-family: monospace
 
 h1
   font-size: 2rem
@@ -49,6 +47,4 @@ h6
 a
   text-decoration: none
 
-.brutal-container
-  padding: 0.5rem
-  width: min(100%, 500px)
+@import "$/styles/components"

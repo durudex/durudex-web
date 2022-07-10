@@ -1,56 +1,9 @@
-import {Link} from 'solid-app-router'
-
-import {showError, showMessage, showNotification} from '$/notifications/api'
-
-import bavovna from '$/assets/bavovna.png'
-
 import '$/home/home.sass'
 
-let first = true
-
 export function Home() {
-  if (first) {
-    showError('Error!!!!')
-    showMessage('Message title', 'message body')
-    showNotification(close => ({
-      title: <h3>Notification title</h3>,
-      body: 'notification body',
-      actions: (
-        <button class="button full-width" onClick={close}>
-          Dismiss
-        </button>
-      ),
-    }))
-  }
-
-  first = false
-
   return (
-    <div class="home flex-center forward-height">
-      <div class="typography brutal-container">
-        {/* <h1>Durudex web app</h1>
-        <h2>Durudex web app</h2>
-        <h3>Durudex web app</h3>
-        <h4>Durudex web app</h4>
-        <h5>Durudex web app</h5>
-        <h6>Durudex web app</h6>
-        <p>Sign in to an account or create one</p>
-        <ul>
-          <li>
-            <Link href="/auth">Auth Page</Link>
-          </li>
-          <li>
-            <Link href="/auth/sign-in">Sign In</Link>
-          </li>
-          <li>
-            <Link href="/auth/sign-up">Sign Up</Link>
-          </li>
-        </ul> */}
-        <figure class="home__figure">
-          <img class="home__img" src={bavovna} />
-          <figcaption class="home__figcaption">Кам'янське</figcaption>
-        </figure>
-      </div>
+    <div class="home">
+      <h1 class="home__title">Homepage</h1>
     </div>
   )
 }

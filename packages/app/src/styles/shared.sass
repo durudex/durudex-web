@@ -20,10 +20,14 @@
 $primary: #9104ff
 $primaryDark: #880ae9
 $background: #fff
-$backgroundDark: #eee
+$backgroundDark: #d9d9d9
 $text: #4f506a
 $danger: #ff0000
 $dangerDark: #da0a0a
+
+// breakpoint
+
+$simplifyBr: 850px
 
 // helpers
 
@@ -58,3 +62,40 @@ $dangerDark: #da0a0a
 @mixin forward-height
   height: 100%
   position: relative
+
+// components 
+
+@mixin typography
+  @include column(1rem)
+  ul, ol
+    @include column(.25rem)
+    li
+      margin-left: 2rem
+
+@mixin button
+  padding: .6rem
+  border-radius: .75rem
+  font: inherit
+  font-weight: 800
+  font-size: 1.2rem
+  text-align: center
+  color: white
+  background-color: $primary
+  border: none
+  &:hover
+    background-color: $primaryDark
+
+@mixin buttonOutline
+  @include button
+  background: none
+  border: 3px solid $background
+  color: $background
+  outline: 0px solid $backgroundDark
+  transition: all .1s
+  outline-offset: -1px
+
+  &:hover
+    background: none
+    color: $backgroundDark
+    border: 3px solid $backgroundDark
+    outline-width: 4px

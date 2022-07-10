@@ -15,6 +15,13 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {AuthScreen} from '$/auth/shared'
+import paneBg from '$/assets/background/3.jpg'
+
 export function SignUp() {
-  return null
+  return (
+    <AuthScreen paneSrc={paneBg} paneLeftwards={false} title="Sign Up">
+      <p>Body</p>
+    </AuthScreen>
+  )
 }

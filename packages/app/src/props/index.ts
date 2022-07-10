@@ -17,7 +17,7 @@
 
 import {JSXElement as Element} from 'solid-js'
 
-export {Element}
+export type {Element}
 
 export type WithChildren = {children: Element}
 export type WithClass = {class?: string}
