@@ -27,7 +27,7 @@ import {Router, Routes, Route} from 'solid-app-router'
 import {NotificationsRoot} from '$/notifications/root'
 import {lazyModule} from '$/lazy-module/lazy-module'
 
-const {AuthHome, SignIn, SignUp} = lazyModule(() => import('$/auth'))
+const {AuthHome, SignIn, SignUp} = lazyModule(() => import('$/auth/auth'))
 const {Home} = lazyModule(() => import('$/home/home'))
 
 function App() {
