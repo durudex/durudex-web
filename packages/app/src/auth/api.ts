@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {defineQuery, gql} from '$/api/api'
+import {defineQuery, gql} from '@durudex-web/api'
 
 export interface SignUpInput {
   username: string

@@ -1,0 +1,12 @@
+{
+  "name": "@durudex-web/api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@durudex-web/flow": "*",
+    "@durudex-web/form": "*",
+    "@urql/core": "^2.6.0",
+    "graphql": "^16.5.0"
+  }
+}

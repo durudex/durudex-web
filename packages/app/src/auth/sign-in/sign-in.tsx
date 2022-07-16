@@ -19,7 +19,7 @@ import paneBg from '$/assets/background/1.jpg'
 import {Submit} from '$/auth/submit/submit'
 import {AuthScreen} from '$/auth/shared'
 import {createForm, validator} from '@durudex-web/form'
-import {signIn} from '$/auth/sign-in/service'
+import {signIn} from '$/auth/sign-in/api'
 import {InputString} from '$/input/input'
 
 let first = true
@@ -65,6 +65,9 @@ export function SignIn() {
         <Submit form={form} onSubmit={submit}>
           Sign In
         </Submit>
+        <a href="/auth/sign-up" class="authScreen__actionAlt">
+          Sign Up
+        </a>
       </div>
     </AuthScreen>
   )

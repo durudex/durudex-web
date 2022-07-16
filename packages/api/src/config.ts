@@ -15,33 +15,14 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {defineQuery, gql} from '$/api/api'
-import {Form} from '@durudex-web/form'
+import {createState} from '@durudex-web/flow'
 
-export interface SignInInput {
-  username: string
-  password: string
-}
+type ShowError = (error: string) => void | Promise<void>
 
-interface SignInResult {
-  access: string
-  refresh: string
-}
-
-const query = defineQuery<SignInInput, SignInResult>(
-  'mutation',
-  gql`
-    mutation SignIn($username: String!, $password: String!) {
-      signIn(input: {username: $username, password: $password}) {
-        access
-        refresh
-      }
-    }
-  `
-)
-
-export function signIn(form: Form<SignInInput>) {
-  query.runWithForm(form).then(result => {
-    if (!result.data) return
-  })
-}
+export const access = createState<string | null>(null)
+export const refresh = createState<string | null>(null)
+export const showError = createState<ShowError>(() => {
+  const msg = 'showError not specified'
+  alert(msg)
+  throw new Error(msg)
+})

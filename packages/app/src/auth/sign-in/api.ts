@@ -16,12 +16,32 @@
  */
 
 import {defineQuery, gql} from '@durudex-web/api'
+import {Form} from '@durudex-web/form'
 
-export const createVerificationCode = defineQuery(
+export interface SignInInput {
+  username: string
+  password: string
+}
+
+interface SignInResult {
+  access: string
+  refresh: string
+}
+
+const query = defineQuery<SignInInput, SignInResult>(
   'mutation',
   gql`
-    mutation CreateVerificationCode($email: String!) {
-      createVerifyEmailCode(email: $email)
+    mutation SignIn($username: String!, $password: String!) {
+      signIn(input: {username: $username, password: $password}) {
+        access
+        refresh
+      }
     }
   `
 )
+
+export function signIn(form: Form<SignInInput>) {
+  query.runWithForm(form).then(result => {
+    if (!result.data) return
+  })
+}
