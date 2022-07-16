@@ -15,5 +15,21 @@
 
 <h1 align="center">⚡️ Durudex Web</h1>
 
+## Modules
+
+[`api`](packages/api): `@urql/core`-based client for Durudex API
+[`app`](packages/app): SolidJS application
+[`flow`](packages/flow): SolidJS extensions
+[`form`](packages/form): object-oriented reactive forms with validation
+[`test-api`](packages/test-api): tiny server that proxies Durudex Test API
+
+## Develop
+
+1. Clone this repo
+2. Install deps: `pnpm install --recursive`
+3. Start development server (in packages/app): `vite`
+4. Build app: `vite build`
+
 ## ⚠️ License
+
 Copyright © 2022 [Durudex](https://github.com/durudex). Released under the [GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html) license.
