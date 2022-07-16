@@ -3,11 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "license": "AGPL-3.0-or-later",
-  "main": "./src/form.ts",
-  "exports": {
-    ".": "./src/form.ts",
-    "./validator": "./src/validator.ts"
-  },
+  "main": "./src/index.ts",
   "dependencies": {
     "@durudex-web/flow": "*"
   }

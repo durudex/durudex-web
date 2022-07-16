@@ -15,92 +15,69 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Setter, Channel, createEffect} from '@durudex-web/flow'
+import {Setter, Getter, createEffect} from '@durudex-web/flow'
 
-type ValidatorSink = Setter<string>
-type ValidatorFn<Params = void> = (sink: ValidatorSink, params: Params) => void
+type Sink = Setter<string>
+type Validator = (sink: Sink) => void
+type Validators = (Validator | Validator[])[]
 
-export class Validator<Params = void> {
-  static of<Params>(fn: ValidatorFn<Params>) {
-    return new Validator<Params>((sink, params) => {
-      let flushed = false
-
-      fn(next => {
-        if (next !== '') flushed = true
-        sink(next)
-      }, params)
-
-      if (!flushed) sink('')
-    })
-  }
-
-  static join(validators: ValidatorFn[]) {
-    return new Validator(sink => {
-      for (const validator of validators) {
-        let flushed = false
-        validator(next => {
-          if (next !== '') flushed = true
-          sink(next)
-        })
-
-        if (flushed) {
-          return
-        }
-      }
-    })
-  }
-
-  private constructor(readonly fn: ValidatorFn<Params>) {}
-
-  run(sink: ValidatorSink, params: Params) {
-    let stop = false
-    createEffect(() => {
-      if (stop) return
-      this.fn(sink, params)
-    })
-    return () => (stop = true)
-  }
-
-  bind(params: Params): ValidatorFn {
-    return sink => this.fn(sink, params)
-  }
-}
-
+const USERNAME_REGEXP = /^[a-zA-Z0-9-_.]{3,40}$/
 const EMAIL_REGEXP =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const PASSWORD_REGEXP = /^[a-zA-Z0-9@$!%*?&]{8,100}$/
 
-export namespace Validators {
-  export const nonEmpty = Validator.of<{
-    subject: string
-    value: Channel<string>
-  }>((sink, {subject, value}) => {
-    if (value() === '') {
-      sink(`${subject} is required`)
-    }
-  })
-
-  export const createRegexp = (regexp: RegExp, message: string) =>
-    Validator.of<Channel<string>>((sink, value) => {
+function ofRegexp(regexp: RegExp, message: string) {
+  return (value: Getter<string>): Validator =>
+    sink => {
       if (regexp.test(value()) === false) {
         sink(message)
       }
-    })
+    }
+}
 
-  export const email = createRegexp(EMAIL_REGEXP, 'Not a valid email')
-  const passwordBase = createRegexp(PASSWORD_REGEXP, 'Not a valid password')
+function nonEmpty(message: string) {
+  return (value: Getter<string>): Validator =>
+    sink => {
+      if (value() === '') sink(message)
+    }
+}
 
-  export const createPassword = (
-    password: Channel<string>,
-    repeat: Channel<string>
-  ) =>
-    Validator.join([
-      nonEmpty.bind({subject: 'Password', value: password}),
-      passwordBase.bind(password),
-      sink => {
-        if (password() !== repeat()) {
-          sink('Passwords must match')
-        }
-      },
-    ])
+export const username = (value: Getter<string>) => [
+  nonEmpty('Username is required')(value),
+  ofRegexp(USERNAME_REGEXP, 'Not a valid username')(value),
+]
+
+export const email = (value: Getter<string>) => [
+  nonEmpty('Email is required'),
+  ofRegexp(EMAIL_REGEXP, 'Not a valid email'),
+]
+
+export const passwordBase = (value: Getter<string>) => [
+  nonEmpty('Password is required')(value),
+  ofRegexp(PASSWORD_REGEXP, 'Not a valid password')(value),
+]
+
+export const password = (
+  value: Getter<string>,
+  repeat: Getter<string>
+): Validators => [
+  passwordBase(value),
+  sink => {
+    if (value() !== repeat()) sink('Passwords must match')
+  },
+]
+
+export function run(sink: Sink, validators: Validators) {
+  createEffect(() => {
+    for (const validate of validators.flat()) {
+      let flushed = false
+      validate(next => {
+        if (next !== '') flushed = true
+        return sink(next)
+      })
+      if (flushed) return
+    }
+
+    sink('')
+  })
 }

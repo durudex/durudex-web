@@ -18,15 +18,23 @@
 import {createSignal as solidCreateSignal} from 'solid-js'
 import {SignalOptions} from 'solid-js/types/reactive/signal'
 
-export type Channel<T> = (next?: T) => T
-export type Getter<T> = () => T
-export type Setter<T> = (next: T) => void
+export type Channel<Value> = (next?: Value) => Value
+export type Getter<Value> = () => Value
+export type Setter<Value> = (next: Value) => Value
 
-export function createChannel<T>(
-  get: () => T,
-  set: (next: T) => T
-): Channel<T> {
-  return (next?: T) => (next === undefined ? get() : set(next))
+export function createChannel<Value>(
+  get: () => Value,
+  set: (next: Value) => Value
+): Channel<Value> {
+  return (next?: Value) => (next === undefined ? get() : set(next))
+}
+
+export function createState<Value>(initial: Value) {
+  let current = initial
+  return createChannel(
+    () => current,
+    next => (current = next)
+  )
 }
 
 export function createSignal<Value extends {} | null>(
@@ -44,6 +52,8 @@ export function createSignal<Value extends {} | null>(
 export {
   createEffect,
   createMemo,
+  on,
+  untrack,
   //
   For,
   Show,
@@ -53,4 +63,5 @@ export {
   onMount,
   onCleanup,
 } from 'solid-js'
+export {createLazyMemo} from '@solid-primitives/memo'
 export {createMutable} from 'solid-js/store'

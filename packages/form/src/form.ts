@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Channel, createSignal, createMemo} from '@durudex-web/flow'
+import {Channel, createSignal, createLazyMemo} from '@durudex-web/flow'
 
 export class Form<Schema extends {} = {}> {
   private fields = new Map<string, Field>()
@@ -34,23 +34,26 @@ export class Form<Schema extends {} = {}> {
     return val
   }
 
-  unwrap = createMemo<Schema | null>(() => {
+  struct = createLazyMemo<Schema | null>(() => {
     const obj: any = {}
+
     for (const key of this.fields.keys()) {
       const field = this.getField(key)
       if (field.error()) return null
       obj[key] = field.value()
     }
+
     return obj
   })
 
-  isValid() {
-    return !this.pending() && !!this.unwrap()
+  block() {
+    return this.pending() || this.struct() === null
   }
 
   assert(): Schema {
-    if (!this.isValid()) throw new Error('Form is invalid')
-    return this.unwrap()!
+    const res = this.struct()
+    if (res === null) throw new Error('Form is invalid')
+    return res!
   }
 
   propagateErrors(rec: Record<string, string>) {
@@ -73,16 +76,15 @@ export class Field<T = any> {
   }
 }
 
-type Definitions = Record<string, Field<any>>
 type Define = <Value>(value: Value) => Field<Value>
-type DefinitionsToSchema<D extends Definitions> = {
-  [K in keyof D]: D[K] extends Field<infer F> ? F : never
+type SchemaToDefs<Schema> = {
+  [K in keyof Schema]: Field<Schema[K]>
 }
 
-export function createForm<D extends Definitions>(
-  getDefinitions: (define: Define) => D
+export function createForm<Schema>(
+  getDefinitions: (define: Define) => SchemaToDefs<Schema>
 ) {
-  const form = new Form<DefinitionsToSchema<D>>()
+  const form = new Form<Schema>()
 
   const defs = getDefinitions(val => new Field(val))
 
