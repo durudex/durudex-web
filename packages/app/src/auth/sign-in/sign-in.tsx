@@ -61,12 +61,12 @@ export function SignIn() {
           error={password.error()}
         />
       </div>
-      <div class="signIn__actions">
+      <div class="authScreen__actions">
         <Submit form={form} onSubmit={submit}>
           Sign In
         </Submit>
         <a href="/auth/sign-up" class="authScreen__actionAlt">
-          Sign Up
+          Create an account
         </a>
       </div>
     </AuthScreen>

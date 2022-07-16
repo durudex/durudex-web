@@ -47,5 +47,11 @@ body.withAuthPage
   @include forward-height
 .authScreen__content
   @include justify-between
-.authScreen__form
+.authScreen__form, .authScreen__actions
   @include column(1rem)
+.authScreen__actionAlt
+  text-align: center
+  font-weight: 700
+  color: unset
+  &:hover
+    color: $textDark

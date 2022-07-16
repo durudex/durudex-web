@@ -17,34 +17,6 @@
 
 import {defineQuery, gql} from '@durudex-web/api'
 
-export interface SignUpInput {
-  username: string
-  email: string
-  password: string
-  code: number
-}
-
-export const signUp = defineQuery<SignUpInput>(
-  'mutation',
-  gql`
-    mutation SignUp(
-      $username: String!
-      $email: String!
-      $password: String!
-      $code: Uint64!
-    ) {
-      signUp(
-        input: {
-          username: $username
-          email: $email
-          password: $password
-          code: $code
-        }
-      )
-    }
-  `
-)
-
 export const forgotPassword = defineQuery(
   'mutation',
   gql`
