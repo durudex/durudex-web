@@ -15,13 +15,57 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {AuthScreen} from '$/auth/shared'
 import paneBg from '$/assets/background/1.jpg'
+import {Submit} from '$/auth/submit/submit'
+import {AuthScreen} from '$/auth/shared'
+import {createForm, validator} from '@durudex-web/form'
+import {signIn} from '$/auth/sign-in/service'
+import {InputString} from '$/input/input'
+
+let first = true
 
 export function SignIn() {
+  if (first) {
+    first = false
+    return null
+  }
+
+  const [form, {username, password}] = createForm(f => ({
+    username: f(''),
+    password: f(''),
+  }))
+
+  validator.run(username.error, validator.username(username.value))
+  validator.run(password.error, validator.passwordBase(password.value))
+
+  function submit() {
+    signIn(form)
+  }
+
   return (
-    <AuthScreen paneSrc={paneBg} paneLeftwards={true} title="Sign In">
-      <p>Body</p>
+    <AuthScreen
+      paneSrc={paneBg}
+      paneLeftwards={true}
+      title="Sign In"
+      class="signIn"
+    >
+      <div class="authScreen__form signIn__body">
+        <InputString
+          label="Username"
+          value={username.value}
+          error={username.error()}
+        />
+        <InputString
+          label="Password"
+          value={password.value}
+          error={password.error()}
+        />
+      </div>
+      <div class="signIn__actions">
+        <Submit form={form} onSubmit={submit}>
+          Sign In
+        </Submit>
+      </div>
     </AuthScreen>
   )
 }

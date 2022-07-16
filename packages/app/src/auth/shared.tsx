@@ -18,7 +18,7 @@
 import '$/auth/shared.sass'
 
 import {useBodyClass, useBodyStyle} from '$/use/body'
-import {WithChildren, WithClass, classes} from '$/props'
+import {WithChildren, WithClass, classes} from '$/props/props'
 import durudexLogo from '$/assets/logo.png'
 
 const GRADIENT = 'linear-gradient(245.03deg, #9D1CED 8.14%, #1C24ED 92.58%)'
@@ -40,14 +40,17 @@ type AuthScreenProps = AuthPageProps & {
 
 export function AuthScreen(props: AuthScreenProps) {
   return (
-    <AuthPage class={classes(props, 'authScreen')}>
-      <div class="authScreen__body">
+    <AuthPage
+      class={`authScreen ${props.paneLeftwards ? 'authScreen_inverse' : ''}`}
+    >
+      <div class={classes(props, 'authScreen__body')}>
         <h1 class="authScreen__title">{props.title}</h1>
-        <div class="authScreen__content">{props.children}</div>
+        <div class="authScreen__content column justify-between">
+          {props.children}
+        </div>
       </div>
       <div
         class="authScreen__pane"
-        classList={{authScreen_inverse: props.paneLeftwards}}
         style={{'background-image': `url(${props.paneSrc})`}}
       >
         <img

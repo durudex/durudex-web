@@ -17,7 +17,7 @@
 
 import '$/notifications/root.sass'
 
-import {Element} from '$/props'
+import {Element} from '$/props/props'
 import {createMutable, For} from '@durudex-web/flow'
 
 export interface NotificationProps {
@@ -41,10 +41,6 @@ export function NotificationsRoot() {
 
 function Notification(props: NotificationProps) {
   let node!: HTMLDivElement
-
-  // onMount(() => {
-  //   node.animate([{opacity: 0}, {opacity: 1}], 100)
-  // })
 
   return (
     <div ref={node} class="notification">
