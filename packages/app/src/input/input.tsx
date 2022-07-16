@@ -1,6 +1,6 @@
 import '$/input/input.sass'
 
-import {Channel} from '@durudex-web/flow'
+import {Channel, Show} from '@durudex-web/flow'
 import {WithChildren, WithClass, classes} from '$/props/props'
 
 type InputBaseProps = WithClass & {label: string; error: string}
@@ -30,7 +30,11 @@ export function InputString(props: InputStringProps) {
   }
 
   return (
-    <InputBase {...props} class={classes(props, 'inputString')}>
+    <InputBase
+      {...props}
+      error={props.value() ? props.error : ''}
+      class={classes(props, 'inputString')}
+    >
       <input
         class="inputString__input input__body"
         type="string"
