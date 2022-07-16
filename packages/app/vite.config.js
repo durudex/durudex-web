@@ -28,13 +28,17 @@ if (process.argv[2] !== 'build') {
 
 const relative = dir => resolve(process.cwd(), dir)
 
+const preview = Boolean(process.env.BUILD_PREVIEW)
+
 export default defineConfig({
   plugins: [
     solid(),
     checker({typescript: true}),
     compression({algorithm: 'brotliCompress'}),
   ],
-  build: {},
+  build: {
+    minify: preview ? false : 'esbuild',
+  },
   server: {
     proxy: {
       '/dev-api': {
