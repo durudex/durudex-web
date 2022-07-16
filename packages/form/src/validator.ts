@@ -48,8 +48,8 @@ export const username = (value: Getter<string>) => [
 ]
 
 export const email = (value: Getter<string>) => [
-  nonEmpty('Email is required'),
-  ofRegexp(EMAIL_REGEXP, 'Not a valid email'),
+  nonEmpty('Email is required')(value),
+  ofRegexp(EMAIL_REGEXP, 'Not a valid email')(value),
 ]
 
 export const passwordBase = (value: Getter<string>) => [
