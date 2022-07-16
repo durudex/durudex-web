@@ -1,0 +1,18 @@
+@use '$/styles/shared' as *
+
+.input
+  @include column(.3rem)
+.input__label
+  font-weight: 700
+  @include row(.5rem)
+  align-items: flex-end
+  font-size: 1.1rem
+  margin-left: 0.5rem
+.input__error
+  font-size: .9rem
+  font-weight: 600
+  color: $danger
+.input__body
+  border: 1px solid #ccc
+  padding: 0.25rem 0.7rem
+  border-radius: .7rem

@@ -22,6 +22,7 @@ $primaryDark: #880ae9
 $background: #fff
 $backgroundDark: #d9d9d9
 $text: #4f506a
+$textDark: #434458
 $danger: #ff0000
 $dangerDark: #da0a0a
 
@@ -38,6 +39,10 @@ $simplifyBr: 850px
 @mixin justify-center
   display: flex
   justify-content: center
+
+@mixin justify-between
+  display: flex
+  justify-content: space-between
 
 @mixin flex-center
   @include align-center
@@ -84,6 +89,12 @@ $simplifyBr: 850px
   border: none
   &:hover
     background-color: $primaryDark
+
+@mixin buttonDisabled
+  background-color: $text
+  color: $background
+  &:hover
+    background-color: $textDark
 
 @mixin buttonOutline
   @include button
