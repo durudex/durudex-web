@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {defineQuery, gql} from '$/api/core'
+import {defineQuery, gql} from '$/api/api'
 
 export const createVerificationCode = defineQuery(
   'mutation',

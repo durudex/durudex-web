@@ -15,13 +15,33 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {defineQuery, gql} from '$/api/core'
+import {defineQuery, gql} from '$/api/api'
+import {Form} from '@durudex-web/form'
 
-export const refreshAccess = defineQuery<{refresh: string}, string>(
+export interface SignInInput {
+  username: string
+  password: string
+}
+
+interface SignInResult {
+  access: string
+  refresh: string
+}
+
+const query = defineQuery<SignInInput, SignInResult>(
   'mutation',
   gql`
-    mutation RefreshAccess($token: String!) {
-      refreshToken(input: {token: $token})
+    mutation SignIn($username: String!, $password: String!) {
+      signIn(input: {username: $username, password: $password}) {
+        access
+        refresh
+      }
     }
   `
 )
+
+export function signIn(form: Form<SignInInput>) {
+  query.runWithForm(form).then(result => {
+    if (!result.data) return
+  })
+}

@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Element} from '$/props'
+import {Element} from '$/props/props'
 import {NotificationProps, notifications} from '$/notifications/root'
 
 export type NotificationConfig = (close: () => void) => NotificationProps
