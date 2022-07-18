@@ -18,14 +18,10 @@
 import {createClient, gql, TypedDocumentNode} from '@urql/core'
 import {Form} from '@durudex-web/form'
 
-import {
-  Operation,
-  operationFromResult,
-  reportErrors,
-  errorOperation,
-} from './operation'
-import {access, refresh} from './config'
+import {ApiResult, resultOfUrql, reportErrors, resultErr} from './api-result'
+import {config} from './config'
 
+export {config}
 export {gql}
 
 const ApiUrl = (import.meta as any).env.PROD
@@ -51,9 +47,9 @@ class Query<Variables extends {}, Data> {
     private withAuth: boolean
   ) {}
 
-  run(variables: Variables): Promise<Operation<Data>> {
+  run(variables: Variables): Promise<ApiResult<Data>> {
     const headers: HeadersInit = this.withAuth
-      ? {Authentication: `Bearer ${access()}`}
+      ? {Authentication: `Bearer ${config.access}`}
       : {}
 
     return client[this.type]<Data, Variables>(
@@ -63,19 +59,16 @@ class Query<Variables extends {}, Data> {
       {fetchOptions: {headers}}
     )
       .toPromise()
-      .then(operationFromResult)
+      .then(resultOfUrql)
       .catch(error => {
         console.error('api error:')
         console.dir(error)
-        return errorOperation<any>([
-          'Something went wrong while fetching data.',
-        ])
+        return resultErr<any>(['Something went wrong while fetching data.'])
       })
 
       .then(async result => {
-        const currentRefresh = refresh()
-        if (hasAccessError(result) && currentRefresh) {
-          await this.refreshAndRerun(currentRefresh, variables)
+        if (hasAccessError(result) && config.refresh) {
+          await this.refreshAndRerun(variables)
         }
 
         await reportErrors(result)
@@ -84,10 +77,10 @@ class Query<Variables extends {}, Data> {
       })
   }
 
-  private async refreshAndRerun(refreshTok: string, variables: Variables) {
-    const {data} = await refreshTokenQuery.run({refresh: refreshTok})
+  private async refreshAndRerun(variables: Variables) {
+    const {data} = await refreshTokenQuery.run({refresh: config.refresh!})
     if (data) {
-      access(data)
+      config.access = data
       return this.run(variables)
     }
   }
@@ -96,19 +89,19 @@ class Query<Variables extends {}, Data> {
     form.pending(true)
     const variables = form.assert()
 
-    return this.run(variables).then(op => {
-      if (op.variableErrors) {
-        form.propagateErrors(op.variableErrors)
+    return this.run(variables).then(res => {
+      if (res.variableErrors) {
+        form.propagateErrors(res.variableErrors)
       }
       form.pending(false)
-      return op
+      return res
     })
   }
 }
 
 const AuthTokenFailedMsg = 'Authorization token failed'
 
-function hasAccessError<Data>(result: Operation<Data>) {
+function hasAccessError<Data>(result: ApiResult<Data>) {
   if (result.errors) {
     const [err] = result.errors
     if (
@@ -130,3 +123,5 @@ const refreshTokenQuery = defineQuery<{refresh: string}, string>(
     }
   `
 )
+
+interface Modules {}

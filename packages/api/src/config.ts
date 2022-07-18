@@ -15,14 +15,19 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createState} from '@durudex-web/flow'
-
 type ShowError = (error: string) => void | Promise<void>
+export interface Config {
+  access: string | null
+  refresh: string | null
+  showError: ShowError
+}
 
-export const access = createState<string | null>(null)
-export const refresh = createState<string | null>(null)
-export const showError = createState<ShowError>(() => {
-  const msg = 'showError not specified'
-  alert(msg)
-  throw new Error(msg)
-})
+export const config: Config = {
+  access: null,
+  refresh: null,
+  showError() {
+    const msg = 'showErr not configured'
+    alert(msg)
+    throw new Error(msg)
+  },
+}

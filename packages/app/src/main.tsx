@@ -27,6 +27,10 @@ import {Router, Routes, Route} from 'solid-app-router'
 import {NotificationsRoot} from '$/notifications/root'
 import {lazyModule} from '$/lazy-module/lazy-module'
 
+import {showError} from '$/notifications/api'
+import {config} from '@durudex-web/api'
+config.showError = showError
+
 const {AuthHome, SignIn, SignUp} = lazyModule(() => import('$/auth/auth'))
 const {Home} = lazyModule(() => import('$/home/home'))
 

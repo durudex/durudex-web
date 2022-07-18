@@ -16,9 +16,9 @@
  */
 
 import {Form} from '@durudex-web/form'
-import {OperationResult as RawResult} from '@urql/core'
+import {OperationResult as UrqlResult} from '@urql/core'
 
-import {showError} from './config'
+import {config} from './config'
 
 const ErrorsToVarsMappping: Record<string, string> = {
   'Invalid Username': 'username',
@@ -26,27 +26,27 @@ const ErrorsToVarsMappping: Record<string, string> = {
   'Invalid Password': 'password',
 }
 
-type OperationErrors = (Error | string)[]
-type OperationVariableErrors = Record<string, string> | null
+type ApiResultErrors = (Error | string)[]
+type ApiResultVariableErrors = Record<string, string> | null
 
 // prettier-ignore
-export type Operation<Data> =
+export type ApiResult<Data> =
   | { data: Data; errors: null; variableErrors:null}
   | {
       data: null
-      errors: OperationErrors
-      variableErrors: OperationVariableErrors
+      errors: ApiResultErrors
+      variableErrors: ApiResultVariableErrors
     }
 
-export function operationFromResult<Vars, Res>(
-  raw: RawResult<Res, Vars>
-): Operation<Res> {
+export function resultOfUrql<Vars, Res>(
+  raw: UrqlResult<Res, Vars>
+): ApiResult<Res> {
   if (raw.data) {
-    return okOperation(raw.data)
+    return resultOk(raw.data)
   }
 
   if (raw.error?.networkError) {
-    return errorOperation([raw.error.networkError])
+    return resultErr([raw.error.networkError])
   }
 
   if (raw.error?.graphQLErrors) {
@@ -62,42 +62,43 @@ export function operationFromResult<Vars, Res>(
       } else errors.push(err.message)
     }
 
-    return errorOperation(errors, variableErrorsChanged ? variableErrors : null)
+    return resultErr(errors, variableErrorsChanged ? variableErrors : null)
   }
 
   return {} as never
 }
 
-export function okOperation<Data>(data: Data): Operation<Data> {
+export function resultOk<Data>(data: Data): ApiResult<Data> {
   return {data, errors: null, variableErrors: null}
 }
 
-export function errorOperation<Data>(
-  errors: OperationErrors,
-  variableErrors: OperationVariableErrors = null
-): Operation<Data> {
+export function resultErr<Data>(
+  errors: ApiResultErrors,
+  variableErrors: ApiResultVariableErrors = null
+): ApiResult<Data> {
   return {data: null, errors, variableErrors}
 }
 
 export async function reportErrors<Data>(
-  op: Operation<Data>,
+  res: ApiResult<Data>,
   form?: Form<Data>
 ) {
-  if (op.errors) {
-    for (const error of op.errors) {
+  if (res.errors) {
+    for (const error of res.errors) {
       console.error('error:', error)
-      await showError()(typeof error === 'string' ? error : error.message)
+      await config.showError(typeof error === 'string' ? error : error.message)
     }
   }
 
-  if (op.variableErrors) {
+  if (res.variableErrors) {
     console.error('variable errors:')
-    console.dir(op.variableErrors)
+    console.dir(res.variableErrors)
   }
 
   if (form) {
-    if (op.variableErrors) {
-      form.propagateErrors(op.variableErrors)
+    if (res.variableErrors) {
+      form.propagateErrors(res.variableErrors)
+      console.error('PROPAGATE:', res.variableErrors)
     }
   }
 }

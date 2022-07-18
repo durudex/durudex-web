@@ -29,14 +29,6 @@ export function createChannel<Value>(
   return (next?: Value) => (next === undefined ? get() : set(next))
 }
 
-export function createState<Value>(initial: Value) {
-  let current = initial
-  return createChannel(
-    () => current,
-    next => (current = next)
-  )
-}
-
 export function createSignal<Value extends {} | null>(
   value: Value,
   opts: SignalOptions<Value> = {}
