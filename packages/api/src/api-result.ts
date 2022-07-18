@@ -15,10 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Form} from '@durudex-web/form'
 import {OperationResult as UrqlResult} from '@urql/core'
-
-import {config} from './config'
 
 const ErrorsToVarsMappping: Record<string, string> = {
   'Invalid Username': 'username',
@@ -77,28 +74,4 @@ export function resultErr<Data>(
   variableErrors: ApiResultVariableErrors = null
 ): ApiResult<Data> {
   return {data: null, errors, variableErrors}
-}
-
-export async function reportErrors<Data>(
-  res: ApiResult<Data>,
-  form?: Form<Data>
-) {
-  if (res.errors) {
-    for (const error of res.errors) {
-      console.error('error:', error)
-      await config.showError(typeof error === 'string' ? error : error.message)
-    }
-  }
-
-  if (res.variableErrors) {
-    console.error('variable errors:')
-    console.dir(res.variableErrors)
-  }
-
-  if (form) {
-    if (res.variableErrors) {
-      form.propagateErrors(res.variableErrors)
-      console.error('PROPAGATE:', res.variableErrors)
-    }
-  }
 }

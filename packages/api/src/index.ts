@@ -18,8 +18,8 @@
 import {createClient, gql, TypedDocumentNode} from '@urql/core'
 import {Form} from '@durudex-web/form'
 
-import {ApiResult, resultOfUrql, reportErrors, resultErr} from './api-result'
-import {config} from './config'
+import {ApiResult, resultOfUrql, resultErr} from './api-result'
+import {config, ShowError} from './config'
 
 export {config}
 export {gql}
@@ -47,7 +47,10 @@ class Query<Variables extends {}, Data> {
     private withAuth: boolean
   ) {}
 
-  run(variables: Variables): Promise<ApiResult<Data>> {
+  run(
+    variables: Variables,
+    showError = config.showError
+  ): Promise<ApiResult<Data>> {
     const headers: HeadersInit = this.withAuth
       ? {Authentication: `Bearer ${config.access}`}
       : {}
@@ -66,14 +69,24 @@ class Query<Variables extends {}, Data> {
         return resultErr<any>(['Something went wrong while fetching data.'])
       })
 
-      .then(async result => {
-        if (hasAccessError(result) && config.refresh) {
+      .then(async res => {
+        if (hasAccessError(res) && config.refresh) {
+          console.error('access error... re-running query')
           await this.refreshAndRerun(variables)
         }
 
-        await reportErrors(result)
+        if (res.errors) {
+          for (const error of res.errors) {
+            console.error('error:', error)
+            await showError(typeof error === 'string' ? error : error.message)
+          }
+        }
 
-        return result
+        if (res.variableErrors) {
+          console.error('variable errors:')
+          console.dir(res.variableErrors)
+        }
+        return res
       })
   }
 
@@ -85,11 +98,11 @@ class Query<Variables extends {}, Data> {
     }
   }
 
-  runWithForm(form: Form<Variables>) {
+  runWithForm(form: Form<Variables>, showError?: ShowError) {
     form.pending(true)
     const variables = form.assert()
 
-    return this.run(variables).then(res => {
+    return this.run(variables, showError).then(res => {
       if (res.variableErrors) {
         form.propagateErrors(res.variableErrors)
       }
@@ -123,5 +136,3 @@ const refreshTokenQuery = defineQuery<{refresh: string}, string>(
     }
   `
 )
-
-interface Modules {}
