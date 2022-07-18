@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {onMount, onCleanup} from 'solid-js'
+import {onMount, onCleanup} from '@durudex-web/flow'
 
 export function useBodyClass(...tokens: string[]) {
   onMount(() => document.body.classList.add(...tokens))

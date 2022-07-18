@@ -18,7 +18,7 @@
 import '$/notifications/root.sass'
 
 import {Element} from '$/props/props'
-import {createMutable, For} from '@durudex-web/flow'
+import {createMutable, Show} from '@durudex-web/flow'
 
 export interface NotificationProps {
   title: Element
@@ -34,16 +34,16 @@ export function NotificationsRoot() {
       class="notificationsRoot"
       classList={{notificationsRoot__visible: !!notifications.length}}
     >
-      <For each={notifications}>{props => <Notification {...props} />}</For>
+      <Show when={notifications[0]}>
+        {props => <Notification {...props} />}
+      </Show>
     </div>
   )
 }
 
 function Notification(props: NotificationProps) {
-  let node!: HTMLDivElement
-
   return (
-    <div ref={node} class="notification">
+    <div class="notification">
       <div class="notification__title">{props.title}</div>
       <div class="notification__body">{props.body}</div>
       <div class="notification__actions">{props.actions}</div>
