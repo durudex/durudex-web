@@ -21,6 +21,7 @@ const ErrorsToVarsMappping: Record<string, string> = {
   'Invalid Username': 'username',
   'Invalid Email': 'email',
   'Invalid Password': 'password',
+  'Invalid Code': 'code',
 }
 
 type ApiResultErrors = (Error | string)[]
