@@ -1,6 +1,6 @@
 import '$/input/input.sass'
 
-import {Channel, Show} from '@durudex-web/flow'
+import {Channel} from '@durudex-web/lib'
 import {WithChildren, WithClass, classes} from '$/props/props'
 
 type InputBaseProps = WithClass & {label: string; error: string}
