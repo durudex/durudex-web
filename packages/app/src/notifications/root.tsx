@@ -18,7 +18,7 @@
 import '$/notifications/root.sass'
 
 import {Element} from '$/props/props'
-import {createMutable, Show} from '@durudex-web/flow'
+import {createMutable, Show} from '@durudex-web/lib'
 
 export interface NotificationProps {
   title: Element
@@ -30,14 +30,14 @@ export const notifications = createMutable<NotificationProps[]>([])
 
 export function NotificationsRoot() {
   return (
-    <div
-      class="notificationsRoot"
-      classList={{notificationsRoot__visible: !!notifications.length}}
-    >
-      <Show when={notifications[0]}>
-        {props => <Notification {...props} />}
-      </Show>
-    </div>
+    <Show when={notifications[0]}>
+      <div
+        class="notificationsRoot"
+        classList={{notificationsRoot__visible: !!notifications.length}}
+      >
+        <Notification {...notifications[0]} />
+      </div>
+    </Show>
   )
 }
 
