@@ -19,7 +19,7 @@
 
 - [`api`](packages/api): `@urql/core`-based client for Durudex API
 - [`app`](packages/app): SolidJS application
-- [`flow`](packages/flow): SolidJS extensions
+- [`lib`](packages/lib): SolidJS extensions and utilities
 - [`form`](packages/form): object-oriented reactive forms with validation
 - [`test-api`](packages/test-api): tiny server that proxies Durudex Test API
 
