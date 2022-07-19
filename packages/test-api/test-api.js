@@ -16,7 +16,9 @@
  */
 
 import {createServer} from 'node:http'
-import cc from 'concolor'
+import * as c from 'colorette'
+const info = c.blueBright
+const fail = c.redBright
 
 const API_URL = 'https://api.dev.durudex.com/query'
 
@@ -26,7 +28,7 @@ const API_URL = 'https://api.dev.durudex.com/query'
  */
 export function startApi(port) {
   const server = createServer((req, res) => {
-    console.log(cc.info`\n[api request]\n`)
+    console.log(info`\n[api request]\n`)
 
     req.on('data', chunk => {
       fetch(API_URL, {
@@ -40,11 +42,11 @@ export function startApi(port) {
           res.end(JSON.stringify(content))
 
           if (content?.errors?.length > 0) {
-            console.log(cc.fail`\n[has errors]`)
+            console.log(fail`\n[has errors]`)
           }
         })
         .catch(err => {
-          console.error(cc.fail`[rejected]`)
+          console.error(fail`[rejected]`)
           console.dir(err)
         })
     })

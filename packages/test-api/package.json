@@ -3,12 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "concolor": "^1.0.2"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "concolor@1.0.2": "patches/concolor@1.0.2.patch"
-    }
+    "colorette": "^2.0.19"
   },
   "main": "test-api.js",
   "type": "module"

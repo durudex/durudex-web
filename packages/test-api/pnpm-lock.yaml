@@ -1,20 +1,13 @@
 lockfileVersion: 5.4
 
-patchedDependencies:
-  concolor@1.0.2:
-    hash: bphtnxpyeigmir2d2ffz2q3m3e
-    path: patches/concolor@1.0.2.patch
-
 specifiers:
-  concolor: ^1.0.2
+  colorette: ^2.0.19
 
 dependencies:
-  concolor: 1.0.2_bphtnxpyeigmir2d2ffz2q3m3e
+  colorette: 2.0.19
 
 packages:
 
-  /concolor/1.0.2_bphtnxpyeigmir2d2ffz2q3m3e:
-    resolution: {integrity: sha512-EM1ZsJ2DcUTDqCWC55SDXvqonn7wmmrFQWpLGLIP8FExkZoqqvMYlYYfnUGwLbPrB41Y6K7voYI8jiS3BmszSw==}
-    engines: {node: ^12.9 || 14 || 16}
+  /colorette/2.0.19:
+    resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
     dev: false
-    patched: true
