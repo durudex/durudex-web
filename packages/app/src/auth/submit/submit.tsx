@@ -9,14 +9,20 @@ export type SubmitProps<S> =
   WithClass &
   {
     form: Form<S>
-    onSubmit: (value: S) => void|PromiseLike<void>
+    onSubmit: (value: S) => void | PromiseLike<void>
+    pending?: string
   }
 
 export function Submit<FormSchema>(props: SubmitProps<FormSchema>) {
   async function handleClick() {
     if (props.form.block()) return
     props.form.pending(true)
+
+    if (import.meta.env.DEV) {
+      await new Promise(res => setTimeout(res, 1000))
+    }
     await props.onSubmit(props.form.assert())
+
     props.form.pending(false)
   }
 
@@ -26,7 +32,7 @@ export function Submit<FormSchema>(props: SubmitProps<FormSchema>) {
       classList={{button_disabled: props.form.block()}}
       onClick={handleClick}
     >
-      {props.children}
+      {props.form.pending() && props.pending ? props.pending : props.children}
     </button>
   )
 }
