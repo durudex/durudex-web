@@ -22,10 +22,6 @@ const fail = c.redBright
 
 const API_URL = 'https://api.dev.durudex.com/query'
 
-/**
- * Start a http server that logs requests to the console and responds with the data development API returns.
- * @returns Close server function
- */
 export function startApi(port) {
   const server = createServer((req, res) => {
     console.log(info`\n[api request]\n`)
@@ -52,9 +48,9 @@ export function startApi(port) {
     })
   }).listen(port)
 
-  const close = server.close.bind(server)
+  const c = () => server.close()
 
-  process.on('beforeExit', close)
+  process.on('beforeExit', c)
 
-  return close
+  return c
 }
