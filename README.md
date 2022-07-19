@@ -13,15 +13,15 @@
     </a>
 </div>
 
-<h1 align="center">⚡️ Durudex Web</h1>
+<h1 align="center">⚡️ Durudex Web 🚀</h1>
 
 ## Modules
 
-[`api`](packages/api): `@urql/core`-based client for Durudex API
-[`app`](packages/app): SolidJS application
-[`flow`](packages/flow): SolidJS extensions
-[`form`](packages/form): object-oriented reactive forms with validation
-[`test-api`](packages/test-api): tiny server that proxies Durudex Test API
+- [`api`](packages/api): `@urql/core`-based client for Durudex API
+- [`app`](packages/app): SolidJS application
+- [`flow`](packages/flow): SolidJS extensions
+- [`form`](packages/form): object-oriented reactive forms with validation
+- [`test-api`](packages/test-api): tiny server that proxies Durudex Test API
 
 ## Develop
 
