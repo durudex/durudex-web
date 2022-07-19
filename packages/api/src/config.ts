@@ -15,7 +15,8 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-type ShowError = (error: string) => void | Promise<void>
+export type ShowError = (error: string) => void | Promise<void>
+
 export interface Config {
   access: string | null
   refresh: string | null

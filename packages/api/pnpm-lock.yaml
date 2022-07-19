@@ -1,14 +1,14 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@durudex-web/flow': '*'
   '@durudex-web/form': '*'
+  '@durudex-web/lib': '*'
   '@urql/core': ^2.6.0
   graphql: ^16.5.0
 
 dependencies:
-  '@durudex-web/flow': link:../flow
   '@durudex-web/form': link:../form
+  '@durudex-web/lib': link:../lib
   '@urql/core': 2.6.0_graphql@16.5.0
   graphql: 16.5.0
 
