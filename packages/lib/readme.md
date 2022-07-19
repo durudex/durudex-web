@@ -1,17 +1,15 @@
-# Solid wrappers and more
+# `@durudex-web/lib`
 
-## `Channel`, `createChannel`
+## Types
+
+- data access: `Getter`, `Setter`, `Channel` (getter & setter function)
+- common: `Defined` (anything but undefined)
+
+## `createChannel`
 
 Channel is a data access abstraction with a simple interface:
 
-```ts
-// type
-export type Channel<T> = (next?: T) => T
-```
-
 ```js
-// example
-
 function increment(chan: Channel<number>) {
   chan(chan() + 1)
 }
@@ -49,6 +47,9 @@ class User {
 
 Note: there is a better solution for forms and validation in `@durudex-web/form`
 
-## `createEffect`, `createMemo`
+## Re-exported from Solid
 
-Re-exported from Solid.
+- primitives: `createMemo`, `createEffect`, `createLazyMemo`, `createMutable` (store)
+- tracking: `on`, `untrack`
+- components: `For`, `Show`
+- lifecycle: `onMount`, `onCleanup`

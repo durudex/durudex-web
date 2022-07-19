@@ -4,7 +4,7 @@
   "private": true,
   "main": "./src/index.ts",
   "dependencies": {
-    "@durudex-web/flow": "*",
+    "@durudex-web/lib": "*",
     "@durudex-web/form": "*",
     "@urql/core": "^2.6.0",
     "graphql": "^16.5.0"

@@ -1,8 +1,8 @@
 {
-  "name": "@durudex-web/flow",
+  "name": "@durudex-web/lib",
   "version": "1.0.0",
   "license": "AGPL-3.0-or-later",
-  "main": "flow.ts",
+  "main": "src/index.ts",
   "dependencies": {
     "@solid-primitives/memo": "^1.0.0",
     "solid-js": "^1.4.6"
