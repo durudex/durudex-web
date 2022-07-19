@@ -15,32 +15,31 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {AuthScreen} from '$/auth/shared'
-import paneBg from '$/assets/background/3.jpg'
-import {createForm, validator} from '@durudex-web/form'
-import {createSignal} from '@durudex-web/flow'
-import {SignUpInput} from '$/auth/sign-up/api'
-import {InputString} from '$/input/input'
 import {Link} from 'solid-app-router'
+import {createSignal} from '@durudex-web/lib'
+import {createForm, V, validate} from '@durudex-web/form'
+import paneBg from '$/assets/background/3.jpg'
+import {AuthScreen} from '$/auth/shared'
+import {signUp, SignUpInput} from '$/auth/sign-up/api'
+import {Submit} from '$/auth/submit/submit'
+import {InputString} from '$/input/input'
+import {showMessage} from '$/notifications/api'
 
 export function SignUp() {
-  const [form, {username, email, password, code}] = createForm<SignUpInput>(
-    f => ({
-      username: f(''),
-      email: f(''),
-      password: f(''),
-      code: f(0),
-    })
-  )
+  const [form, {username, email, password}] = createForm<SignUpInput>(f => ({
+    username: f(''),
+    email: f(''),
+    password: f(''),
+    code: f(0),
+  }))
 
   const repeatPassword = createSignal<string>('')
 
-  validator.run(username.error, validator.username(username.value))
-  validator.run(email.error, validator.email(email.value))
-  validator.run(
-    password.error,
-    validator.password(password.value, repeatPassword)
-  )
+  validate(username.error, V.username(username.value))
+  validate(email.error, V.email(email.value))
+  validate(password.error, V.password(password.value, repeatPassword))
+
+  async function submitBase(data: SignUpInput) {}
 
   return (
     <AuthScreen paneSrc={paneBg} paneLeftwards={false} title="Sign Up">
@@ -63,6 +62,9 @@ export function SignUp() {
         />
       </div>
       <div class="authScreen__actions">
+        <Submit form={form} onSubmit={submitBase} pending="Signing Up">
+          Sign Up
+        </Submit>
         <Link href="/auth/sign-in" class="authScreen__actionAlt">
           Already have an account?
         </Link>

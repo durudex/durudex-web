@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@durudex-web/flow': '*'
+  '@durudex-web/lib': '*'
 
 dependencies:
-  '@durudex-web/flow': link:../flow
+  '@durudex-web/lib': link:../lib

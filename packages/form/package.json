@@ -5,6 +5,6 @@
   "license": "AGPL-3.0-or-later",
   "main": "./src/index.ts",
   "dependencies": {
-    "@durudex-web/flow": "*"
+    "@durudex-web/lib": "*"
   }
 }

@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Channel, createSignal, createLazyMemo} from '@durudex-web/flow'
+import {Channel, createSignal, createLazyMemo} from '@durudex-web/lib'
 
 export class Form<Schema extends {} = {}> {
   private fields = new Map<string, Field>()

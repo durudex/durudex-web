@@ -18,7 +18,7 @@
 import paneBg from '$/assets/background/1.jpg'
 import {Submit} from '$/auth/submit/submit'
 import {AuthScreen} from '$/auth/shared'
-import {createForm, validator} from '@durudex-web/form'
+import {createForm, V, validate} from '@durudex-web/form'
 import {signIn} from '$/auth/sign-in/api'
 import {InputString} from '$/input/input'
 
@@ -35,8 +35,8 @@ export function SignIn() {
     password: f(''),
   }))
 
-  validator.run(username.error, validator.username(username.value))
-  validator.run(password.error, validator.passwordBase(password.value))
+  validate(username.error, V.username(username.value))
+  validate(password.error, V.passwordBase(password.value))
 
   function submit() {
     signIn(form)

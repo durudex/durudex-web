@@ -15,5 +15,4 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './form'
-export * from './validator'
+import {describe, it, expect} from 'vitest'
