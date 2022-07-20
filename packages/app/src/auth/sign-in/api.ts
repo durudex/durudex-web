@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {defineQuery, gql} from '@durudex-web/api'
+import {defineQuery, gql, Tokens} from '@durudex-web/api'
 import {Form} from '@durudex-web/form'
 
 export interface SignInInput {
@@ -23,12 +23,7 @@ export interface SignInInput {
   password: string
 }
 
-interface SignInResult {
-  access: string
-  refresh: string
-}
-
-const query = defineQuery<SignInInput, SignInResult>(
+const query = defineQuery<SignInInput, Tokens>(
   'mutation',
   gql`
     mutation SignIn($username: String!, $password: String!) {

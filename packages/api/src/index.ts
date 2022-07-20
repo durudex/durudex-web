@@ -136,3 +136,8 @@ const refreshTokenQuery = defineQuery<{refresh: string}, string>(
     }
   `
 )
+
+export interface Tokens {
+  access: string
+  refresh: string
+}

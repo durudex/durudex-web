@@ -26,12 +26,14 @@ import {InputString} from '$/input/input'
 import {showMessage} from '$/notifications/api'
 
 export function SignUp() {
-  const [form, {username, email, password}] = createForm<SignUpInput>(f => ({
-    username: f(''),
-    email: f(''),
-    password: f(''),
-    code: f(0),
-  }))
+  const [form, {username, email, password, code}] = createForm<SignUpInput>(
+    f => ({
+      username: f(''),
+      email: f(''),
+      password: f(''),
+      code: f(0),
+    })
+  )
 
   const repeatPassword = createSignal<string>('')
 
@@ -39,7 +41,18 @@ export function SignUp() {
   validate(email.error, V.email(email.value))
   validate(password.error, V.password(password.value, repeatPassword))
 
-  async function submitBase(data: SignUpInput) {}
+  async function submitBase(data: SignUpInput) {
+    const x = await signUp.runWithForm(form)
+    const e = x.variableErrors ? Object.entries(x.variableErrors) : []
+    if (e.length === 1 && e[0][0] === 'code') {
+      // only code has error'd
+      // get it and retry
+      await showMessage('Verification cod', <>Enter your verification code</>)
+      code.reset()
+    }
+
+    console.log(e)
+  }
 
   return (
     <AuthScreen paneSrc={paneBg} paneLeftwards={false} title="Sign Up">

@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {defineQuery, gql} from '@durudex-web/api'
+import {defineQuery, gql, Tokens} from '@durudex-web/api'
 
 export interface SignUpInput {
   username: string
@@ -24,7 +24,7 @@ export interface SignUpInput {
   code: number
 }
 
-export const signUp = defineQuery<SignUpInput>(
+export const signUp = defineQuery<SignUpInput, Tokens>(
   'mutation',
   gql`
     mutation SignUp(
@@ -40,7 +40,10 @@ export const signUp = defineQuery<SignUpInput>(
           password: $password
           code: $code
         }
-      )
+      ) {
+        access
+        refresh
+      }
     }
   `
 )
