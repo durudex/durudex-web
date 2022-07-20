@@ -15,7 +15,13 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Channel, createSignal, createLazyMemo} from '@durudex-web/lib'
+import {
+  Channel,
+  createSignal,
+  createLazyMemo,
+  log,
+  createEffect,
+} from '@durudex-web/lib'
 
 export class Form<Schema extends {} = {}> {
   private fields = new Map<string, Field>()
@@ -67,8 +73,15 @@ export class Field<T = any> {
   value: Channel<T>
   error = createSignal<string>('')
 
-  constructor(private initial: T) {
+  constructor(private initial: T, public name: string = '') {
     this.value = createSignal(initial)
+    createEffect(() => {
+      this.valueUpdated()
+    })
+  }
+
+  @log<Field>(o => o.name) private valueUpdated() {
+    return this.value()
   }
 
   reset() {
@@ -90,6 +103,7 @@ export function createForm<Schema>(
 
   for (const key in defs) {
     form.add(key, defs[key])
+    defs[key].name = key
   }
 
   return [form, defs] as const

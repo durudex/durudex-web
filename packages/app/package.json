@@ -16,11 +16,9 @@
     "solid-app-router": "^0.4.1",
     "solid-js": "^1.4.6",
     "typescript": "^4.7.4",
-    "vite": "^2.9.14",
     "vite-plugin-checker": "^0.4.7",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-solid": "^2.2.6",
-    "vitest": "^0.17.0"
+    "vite-plugin-solid": "^2.2.6"
   },
   "type": "module"
 }

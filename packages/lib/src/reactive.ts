@@ -17,18 +17,18 @@
 
 import {createSignal as solidCreateSignal} from 'solid-js'
 import {SignalOptions} from 'solid-js/types/reactive/signal'
-import {Channel} from './types'
+import {Defined, Getter, Setter, Channel} from './types'
 
-export function createChannel<Value>(
-  get: () => Value,
-  set: (next: Value) => Value
+export function createChannel<Value extends Defined>(
+  get: Getter<Value>,
+  set: Setter<Value>
 ): Channel<Value> {
-  return (next?: Value) => (next === undefined ? get() : set(next))
+  return next => (next === undefined ? get() : set(next))
 }
 
-export function createSignal<Value extends {} | null>(
+export function createSignal<Value extends Defined>(
   value: Value,
-  opts: SignalOptions<Value> = {}
+  opts?: SignalOptions<Value>
 ) {
   const [get, set] = solidCreateSignal(value, opts)
   // @ts-ignore

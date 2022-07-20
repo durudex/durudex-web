@@ -1,9 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
+  vite: ^3.0.2
   vitest: ^0.18.1
 
 dependencies:
+  vite: 3.0.2
   vitest: 0.18.1
 
 packages:
