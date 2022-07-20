@@ -17,6 +17,7 @@
 
 import {createSignal as solidCreateSignal} from 'solid-js'
 import {SignalOptions} from 'solid-js/types/reactive/signal'
+import {createLazyMemo} from '@solid-primitives/memo'
 import {Defined, Getter, Setter, Channel} from './types'
 
 export function createChannel<Value extends Defined>(
@@ -35,6 +36,8 @@ export function createSignal<Value extends Defined>(
   return createChannel<Value>(get, set)
 }
 
+// re-exports
+
 export {
   createEffect,
   createMemo,
@@ -51,3 +54,24 @@ export {
 } from 'solid-js'
 export {createLazyMemo} from '@solid-primitives/memo'
 export {createMutable} from 'solid-js/store'
+
+// // decorators
+
+export function memo<Host extends object, Value>(
+  _target: Host,
+  _key: string,
+  descriptor: TypedPropertyDescriptor<() => Value>
+) {
+  const memos = new WeakMap<Host, Getter<Value>>()
+
+  const backup = descriptor.value!
+  descriptor.value = function (this: Host) {
+    let memoFn = memos.get(this)
+    if (!memoFn) {
+      memoFn = createLazyMemo(backup.bind(this))
+      memos.set(this, memoFn)
+    }
+
+    return memoFn()
+  }
+}
