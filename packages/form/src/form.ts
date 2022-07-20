@@ -67,6 +67,12 @@ export class Form<Schema extends {} = {}> {
       this.getField(key).error(rec[key])
     }
   }
+
+  reset() {
+    for (const [, field] of this.fields) {
+      field.reset()
+    }
+  }
 }
 
 export class Field<T = any> {
@@ -75,17 +81,11 @@ export class Field<T = any> {
 
   constructor(private initial: T, public name: string = '') {
     this.value = createSignal(initial)
-    createEffect(() => {
-      this.valueUpdated()
-    })
-  }
-
-  @log<Field>(o => o.name) private valueUpdated() {
-    return this.value()
   }
 
   reset() {
     this.value(this.initial)
+    this.error('')
   }
 }
 

@@ -36,9 +36,9 @@ export function log<T extends object>(getId?: (o: T) => string) {
       try {
         const result = backup.apply(this, args)
         if (result !== undefined) {
-          console.info('returned:')
+          console.log('returned:')
           console.dir(result)
-        } else console.info('ok, returned nothing')
+        } else console.log('ok, returned nothing')
         console.groupEnd()
         return result
       } catch (error) {
