@@ -20,10 +20,11 @@ import {createSignal} from '@durudex-web/lib'
 import {createForm, V, validate} from '@durudex-web/form'
 import paneBg from '$/assets/background/3.jpg'
 import {AuthScreen} from '$/auth/shared'
-import {signUp, SignUpInput} from '$/auth/sign-up/api'
+import {signUpQuery, SignUpInput} from '$/auth/sign-up/api'
 import {Submit} from '$/auth/submit/submit'
 import {InputString} from '$/input/input'
 import {showMessage} from '$/notifications/api'
+// import {enterVerificationCode} from '$/verification-code/verification-code'
 
 export function SignUp() {
   const [form, {username, email, password, code}] = createForm<SignUpInput>(
@@ -42,16 +43,17 @@ export function SignUp() {
   validate(password.error, V.password(password.value, repeatPassword))
 
   async function submitBase(data: SignUpInput) {
-    const x = await signUp.runWithForm(form)
-    const e = x.variableErrors ? Object.entries(x.variableErrors) : []
-    if (e.length === 1 && e[0][0] === 'code') {
+    const result = await signUpQuery.runWithForm(form)
+    const varys = result.variableErrors
+      ? Object.entries(result.variableErrors)
+      : []
+    if (varys.length === 1 && varys[0][0] === 'code') {
       // only code has error'd
       // get it and retry
-      await showMessage('Verification cod', <>Enter your verification code</>)
-      code.reset()
-    }
 
-    console.log(e)
+      code.error('')
+      // await enterVerificationCode(code.value)
+    }
   }
 
   return (
@@ -62,13 +64,20 @@ export function SignUp() {
           value={username.value}
           error={username.error()}
         />
-        <InputString label="Email" value={email.value} error={email.error()} />
         <InputString
+          type="email"
+          label="Email"
+          value={email.value}
+          error={email.error()}
+        />
+        <InputString
+          type="password"
           label="Password"
           value={password.value}
           error={password.error()}
         />
         <InputString
+          type="password"
           label="Repeat password"
           value={repeatPassword}
           error={password.error()}

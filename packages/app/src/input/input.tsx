@@ -18,7 +18,12 @@ export function InputBase(props: InputWrapperProps) {
   )
 }
 
-export type InputStringProps = InputBaseProps & {value: Channel<string>}
+type InputType = 'string' | 'email' | 'password'
+
+export type InputStringProps = InputBaseProps & {
+  value: Channel<string>
+  type?: InputType
+}
 
 type InputEvent = {currentTarget: HTMLInputElement}
 
@@ -37,7 +42,7 @@ export function InputString(props: InputStringProps) {
     >
       <input
         class="inputString__input input__body"
-        type="string"
+        type={props.type}
         onInput={handleInput}
       />
     </InputBase>

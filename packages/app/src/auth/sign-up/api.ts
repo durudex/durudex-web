@@ -24,7 +24,7 @@ export interface SignUpInput {
   code: number
 }
 
-export const signUp = defineQuery<SignUpInput, Tokens>(
+export const signUpQuery = defineQuery<SignUpInput, Tokens>(
   'mutation',
   gql`
     mutation SignUp(
