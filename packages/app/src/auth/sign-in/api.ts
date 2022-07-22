@@ -16,14 +16,13 @@
  */
 
 import {defineQuery, gql, Tokens} from '@durudex-web/api'
-import {Form} from '@durudex-web/form'
 
 export interface SignInInput {
   username: string
   password: string
 }
 
-const query = defineQuery<SignInInput, Tokens>(
+export const signInQuery = defineQuery<SignInInput, Tokens>(
   'mutation',
   gql`
     mutation SignIn($username: String!, $password: String!) {
@@ -34,9 +33,3 @@ const query = defineQuery<SignInInput, Tokens>(
     }
   `
 )
-
-export function signIn(form: Form<SignInInput>) {
-  query.runWithForm(form).then(result => {
-    if (!result.data) return
-  })
-}

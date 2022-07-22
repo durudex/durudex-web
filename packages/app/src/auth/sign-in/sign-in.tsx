@@ -19,17 +19,11 @@ import paneBg from '$/assets/background/1.jpg'
 import {Submit} from '$/auth/submit/submit'
 import {AuthScreen} from '$/auth/shared'
 import {createForm, V, validate} from '@durudex-web/form'
-import {signIn} from '$/auth/sign-in/api'
+import {signInQuery} from '$/auth/sign-in/api'
+import {useAuthorize} from '$/auth/api'
 import {InputString} from '$/input/input'
 
-let first = true
-
 export function SignIn() {
-  if (first) {
-    first = false
-    return null
-  }
-
   const [form, {username, password}] = createForm(f => ({
     username: f(''),
     password: f(''),
@@ -38,8 +32,11 @@ export function SignIn() {
   validate(username.error, V.username(username.value))
   validate(password.error, V.passwordBase(password.value))
 
-  function submit() {
-    signIn(form)
+  const authorize = useAuthorize()
+
+  async function submit() {
+    const {data} = await signInQuery.runWithForm(form)
+    if (data) authorize(data)
   }
 
   return (

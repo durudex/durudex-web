@@ -15,7 +15,8 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {defineQuery, gql} from '@durudex-web/api'
+import {defineQuery, gql, Tokens, config} from '@durudex-web/api'
+import {useNavigate} from 'solid-app-router'
 
 export const forgotPassword = defineQuery(
   'mutation',
@@ -29,3 +30,13 @@ export const forgotPassword = defineQuery(
     }
   `
 )
+
+export function useAuthorize() {
+  const nav = useNavigate()
+
+  return (toks: Tokens) => {
+    config.access = toks.access
+    config.refresh = toks.refresh
+    nav('/home')
+  }
+}
