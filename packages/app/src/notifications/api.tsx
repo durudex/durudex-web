@@ -18,7 +18,9 @@
 import {Element} from '$/props/props'
 import {NotificationProps, notifications} from '$/notifications/root'
 
-export type NotificationConfig = (close: () => void) => NotificationProps
+type Close = () => void
+
+export type NotificationConfig = (close: Close) => NotificationProps
 
 export async function showNotification(config: NotificationConfig) {
   let close = () => {}
@@ -31,7 +33,7 @@ export async function showNotification(config: NotificationConfig) {
   notifications.splice(notifications.indexOf(props))
 }
 
-function Dismiss(props: {close: () => void}) {
+function Dismiss(props: {close: Close}) {
   return (
     <button class="button full-width" onClick={props.close}>
       Dismiss

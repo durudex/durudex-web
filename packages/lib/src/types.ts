@@ -20,3 +20,5 @@ export type Defined = {} | null
 export type Getter<Value> = () => Value
 export type Setter<Value> = (next: Value) => Value
 export type Channel<Value> = (next?: Value) => Value
+
+export type Awaitable<Value = void> = Value | PromiseLike<Value>

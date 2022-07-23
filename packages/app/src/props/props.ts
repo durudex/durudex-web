@@ -21,6 +21,7 @@ export type {Element}
 
 export type WithChildren = {children: Element}
 export type WithClass = {class?: string}
+export type Customizable = WithChildren & WithClass
 
 export function classes(props: WithClass, base?: string) {
   return `${base || ''} ${props.class || ''}`
