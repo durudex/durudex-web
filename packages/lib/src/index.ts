@@ -18,3 +18,4 @@
 export * from './types'
 export * from './reactive'
 export * from './debug'
+export * from './delay'

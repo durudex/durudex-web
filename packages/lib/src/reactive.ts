@@ -35,6 +35,11 @@ export function createSignal<Value extends Defined>(
   // @ts-ignore
   return createChannel<Value>(get, set)
 }
+export function createBool(initial = false) {
+  const value = createSignal(initial)
+  const toggle = () => value(!value())
+  return [value, toggle] as const
+}
 
 // re-exports
 

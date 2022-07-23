@@ -31,7 +31,6 @@ export function InputString(props: InputStringProps) {
   function handleInput(e: InputEvent) {
     const next = e.currentTarget.value
     props.value(next)
-    e.currentTarget.value = props.value()
   }
 
   return (
@@ -41,6 +40,7 @@ export function InputString(props: InputStringProps) {
       class={classes(props, 'inputString')}
     >
       <input
+        value={props.value()}
         class="inputString__input input__body"
         type={props.type}
         onInput={handleInput}
