@@ -23,36 +23,45 @@ import {AuthScreen} from '$/auth/shared'
 import {signUpQuery, SignUpInput} from '$/auth/sign-up/api'
 import {SubmitForm} from '$/auth/submit/form'
 import {InputString} from '$/input/input'
-import {showMessage} from '$/notifications/api'
-// import {enterVerificationCode} from '$/verification-code/verification-code'
+import {enterVerificationCode} from '$/verification-code/enter'
+import {getOwner} from 'solid-js'
+import {useAuthorize} from '$/auth/api'
+
+const dev = import.meta.env.DEV
 
 export function SignUp() {
   const [form, {username, email, password, code}] = createForm<SignUpInput>(
     f => ({
-      username: f(''),
-      email: f(''),
-      password: f(''),
+      username: f(dev ? 'xxx' : ''),
+      email: f(dev ? 'xxx@xxx.xxx' : ''),
+      password: f(dev ? 'xxxxxxxxx' : ''),
       code: f(0),
     })
   )
 
-  const repeatPassword = createSignal<string>('')
+  const repeatPassword = createSignal<string>(dev ? 'xxxxxxxxx' : '')
 
   validate(username.error, V.username(username.value))
   validate(email.error, V.email(email.value))
   validate(password.error, V.password(password.value, repeatPassword))
+
+  const owner = getOwner()!
+  const authorize = useAuthorize()
 
   async function submitBase(data: SignUpInput) {
     const result = await signUpQuery.runWithForm(form)
     const varys = result.variableErrors
       ? Object.entries(result.variableErrors)
       : []
+
     if (varys.length === 1 && varys[0][0] === 'code') {
       // only code has error'd
       // get it and retry
-
       code.error('')
-      // await enterVerificationCode(code.value)
+      await enterVerificationCode(code.value, owner)
+
+      const {data} = await signUpQuery.runWithForm(form)
+      if (data) authorize(data)
     }
   }
 
