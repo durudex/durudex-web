@@ -31,10 +31,7 @@ export const notifications = createMutable<NotificationProps[]>([])
 export function NotificationsRoot() {
   return (
     <Show when={notifications[0]}>
-      <div
-        class="notificationsRoot"
-        classList={{notificationsRoot__visible: !!notifications.length}}
-      >
+      <div class="notificationsRoot">
         <Notification {...notifications[0]} />
       </div>
     </Show>
