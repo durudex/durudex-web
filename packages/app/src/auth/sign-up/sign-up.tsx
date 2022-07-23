@@ -21,7 +21,7 @@ import {createForm, V, validate} from '@durudex-web/form'
 import paneBg from '$/assets/background/3.jpg'
 import {AuthScreen} from '$/auth/shared'
 import {signUpQuery, SignUpInput} from '$/auth/sign-up/api'
-import {Submit} from '$/auth/submit/submit'
+import {SubmitForm} from '$/auth/submit/form'
 import {InputString} from '$/input/input'
 import {showMessage} from '$/notifications/api'
 // import {enterVerificationCode} from '$/verification-code/verification-code'
@@ -84,9 +84,9 @@ export function SignUp() {
         />
       </div>
       <div class="authScreen__actions">
-        <Submit form={form} onSubmit={submitBase} pending="Signing Up">
+        <SubmitForm form={form} onSubmit={submitBase}>
           Sign Up
-        </Submit>
+        </SubmitForm>
         <Link href="/auth/sign-in" class="authScreen__actionAlt">
           Already have an account?
         </Link>

@@ -16,15 +16,15 @@
  */
 
 import paneBg from '$/assets/background/1.jpg'
-import {Submit} from '$/auth/submit/submit'
+import {SubmitForm} from '$/auth/submit/form'
 import {AuthScreen} from '$/auth/shared'
 import {createForm, V, validate} from '@durudex-web/form'
-import {signInQuery} from '$/auth/sign-in/api'
+import {signInQuery, SignInInput} from '$/auth/sign-in/api'
 import {useAuthorize} from '$/auth/api'
 import {InputString} from '$/input/input'
 
 export function SignIn() {
-  const [form, {username, password}] = createForm(f => ({
+  const [form, {username, password}] = createForm<SignInInput>(f => ({
     username: f(''),
     password: f(''),
   }))
@@ -59,9 +59,9 @@ export function SignIn() {
         />
       </div>
       <div class="authScreen__actions">
-        <Submit form={form} onSubmit={submit}>
+        <SubmitForm form={form} onSubmit={submit}>
           Sign In
-        </Submit>
+        </SubmitForm>
         <a href="/auth/sign-up" class="authScreen__actionAlt">
           Create an account
         </a>
