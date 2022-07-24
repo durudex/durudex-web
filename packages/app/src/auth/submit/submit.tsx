@@ -1,30 +1,26 @@
-import {Channel, Awaitable, delay, createSignal} from '@durudex-web/lib'
+import {Getter, Awaitable, delay, createSignal} from '@durudex-web/lib'
 import {Customizable, classes} from '$/props/props'
 
 type SubmitBaseProps = Customizable & {
   blocked?: boolean
-  pending?: Channel<boolean>
+  pending?: Getter<boolean>
   onSubmit: () => Awaitable
 }
 
 export function Submit(props: SubmitBaseProps) {
-  const pending = props.pending ?? createSignal<boolean>(false)
-
   async function onClick() {
     if (props.blocked) return
-    pending(true)
     await props.onSubmit()
     if (import.meta.env.DEV) await delay(500)
-    pending(false)
   }
 
   return (
     <button
       class={classes(props, 'full-width button button_bigger')}
-      classList={{button_disabled: props.blocked || pending()}}
+      classList={{button_disabled: props.blocked || props.pending?.()}}
       onClick={onClick}
     >
-      {pending() ? 'Please wait...' : props.children}
+      {props.pending?.() ? 'Please wait...' : props.children}
     </button>
   )
 }

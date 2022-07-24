@@ -20,7 +20,7 @@ const w = Object.assign(window, {__forceDebugInProd: false})
 export function log<T extends object>(getId?: (o: T) => string) {
   return function (target: T, key: string, descriptor: PropertyDescriptor) {
     const method = `${target.constructor.name}..${key}`
-    if (import.meta.env.PROD) {
+    if ((import.meta as any).env.PROD) {
       const at = import.meta.url
       console.warn(`debug not removed in production: method ${method} at ${at}`)
       if (!w.__forceDebugInProd) return

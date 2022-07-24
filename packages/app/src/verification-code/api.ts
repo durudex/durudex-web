@@ -17,7 +17,7 @@
 
 import {defineQuery, gql} from '@durudex-web/api'
 
-export const createVerificationCode = defineQuery(
+const createVerificationCodeQuery = defineQuery<{email: string}>(
   'mutation',
   gql`
     mutation CreateVerificationCode($email: String!) {
@@ -25,3 +25,11 @@ export const createVerificationCode = defineQuery(
     }
   `
 )
+
+export function requestVerificationCode(email: string) {
+  return createVerificationCodeQuery
+    .run({email})
+    .then(x => x.data === undefined)
+}
+
+export const CodeLifetimeSeconds = 15 * 60

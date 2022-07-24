@@ -10,7 +10,7 @@ type SubmitFormProps<Schema> = Customizable & {
 
 export function SubmitForm<Schema extends {}>(props: SubmitFormProps<Schema>) {
   function onSubmit() {
-    return props.onSubmit(props.form.assert())
+    props.onSubmit(props.form.assert())
   }
 
   return (
