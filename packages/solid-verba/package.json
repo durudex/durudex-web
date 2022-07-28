@@ -1,0 +1,9 @@
+{
+  "name": "solid-verba",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "dependencies": {
+    "@solid-primitives/memo": "^1.0.0",
+    "solid-js": "^1.4.7"
+  }
+}

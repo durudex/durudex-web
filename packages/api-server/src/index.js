@@ -17,12 +17,15 @@
 
 import {createServer} from 'node:http'
 import * as c from 'colorette'
+import portfinder from 'portfinder'
 const info = c.blueBright
 const fail = c.redBright
 
 const API_URL = 'https://api.dev.durudex.com/query'
 
-export function startApi(port) {
+export async function startApi() {
+  const port = await portfinder.getPortPromise()
+
   const server = createServer((req, res) => {
     console.log(info`\n[api request]\n`)
 
@@ -48,9 +51,13 @@ export function startApi(port) {
     })
   }).listen(port)
 
-  const c = () => server.close()
+  console.log(info`API server up and running\n`)
 
-  process.on('beforeExit', c)
+  function close() {
+    server.close()
+    console.log(info`Server closed`)
+  }
+  process.on('beforeExit', close)
 
-  return c
+  return [port, close]
 }

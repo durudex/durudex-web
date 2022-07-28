@@ -1,7 +1,0 @@
-lockfileVersion: 5.4
-
-specifiers:
-  '@durudex-web/lib': '*'
-
-dependencies:
-  '@durudex-web/lib': link:../lib

@@ -1,0 +1,12 @@
+{
+  "name": "@durudex-web/api-server",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "colorette": "^2.0.19",
+    "portfinder": "^1.0.28"
+  },
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "type": "module"
+}

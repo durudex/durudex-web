@@ -15,4 +15,6 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {describe, it, expect} from 'vitest'
+export type Close = () => void
+
+export function startApi(): Promise<[port: number, close: Close]>

@@ -1,0 +1,11 @@
+{
+  "name": "@durudex-web/test-api",
+  "dependencies": {
+    "@durudex-web/api": "workspace:*",
+    "@durudex-web/api-server": "workspace:^1.0.0",
+    "@durudex-web/app": "workspace:^1.0.0",
+    "@urql/core": "^2.6.0",
+    "graphql": "^16.5.0",
+    "solid-verba": "workspace:^1.0.0"
+  }
+}

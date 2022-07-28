@@ -4,9 +4,10 @@
   "private": true,
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "dev": "cd packages/app; pnpm dev",
-    "build": "pnpm --filter @durudex-web/app... build",
-    "test": "pnpm --recursive test"
+    "dev": "pnpm -C packages/app dev",
+    "build": "pnpm -C packages/app build",
+    "test": "vitest --run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "vitest": "^0.18.1"

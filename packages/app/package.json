@@ -8,18 +8,18 @@
   },
   "dependencies": {
     "@durudex-web/api": "*",
+    "@durudex-web/api-server": "workspace:^1.0.0",
     "@durudex-web/form": "*",
     "@durudex-web/lib": "*",
-    "@durudex-web/test-api": "*",
     "@fontsource/montserrat": "^4.5.11",
     "sass": "^1.53.0",
-    "solid-app-router": "^0.4.1",
-    "solid-js": "^1.4.7",
-    "typescript": "^4.7.4",
     "vite": "^3.0.2",
     "vite-plugin-checker": "^0.4.7",
-    "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-solid": "^2.2.6"
+    "vite-plugin-solid": "^2.2.6",
+    "solid-app-router": "^0.4.1",
+    "solid-js": "^1.4.7",
+    "solid-verba": "*",
+    "typescript": "^4.7.4"
   },
   "type": "module"
 }

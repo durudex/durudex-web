@@ -25,7 +25,7 @@ export {config}
 export {gql}
 
 const ApiUrl = (import.meta as any).env.PROD
-  ? 'https://api.durudex.com/query'
+  ? 'https://api.dev.durudex.com/query'
   : '/dev-api'
 
 export const client = createClient({url: ApiUrl})

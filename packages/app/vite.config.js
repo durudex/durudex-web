@@ -15,15 +15,16 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {startApi} from '@durudex-web/test-api'
+import {startApi} from '@durudex-web/api-server'
 import {resolve} from 'node:path'
 import {defineConfig} from 'vite'
 import solid from 'vite-plugin-solid'
 import checker from 'vite-plugin-checker'
-import compression from 'vite-plugin-compression'
+
+let port
 
 if (process.argv[2] !== 'build') {
-  startApi(3001)
+  ;[port] = await startApi()
 }
 
 const relative = dir => resolve(process.cwd(), dir)
@@ -31,18 +32,14 @@ const relative = dir => resolve(process.cwd(), dir)
 const preview = Boolean(process.env.BUILD_PREVIEW)
 
 export default defineConfig({
-  plugins: [
-    solid(),
-    checker({typescript: true}),
-    compression({algorithm: 'brotliCompress'}),
-  ],
+  plugins: [solid(), checker({typescript: true})],
   build: {
     minify: preview ? false : 'esbuild',
   },
   server: {
     proxy: {
       '/dev-api': {
-        target: 'http://localhost:3001',
+        target: `http://localhost:${port}`,
       },
       '/*': {
         target: '/',
