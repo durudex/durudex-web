@@ -1,4 +1,3 @@
-import {test} from 'vitest'
-import {} from '@durudex-web/api/src/index'
+import {} from '@durudex-web/api'
 
 test.todo('query', () => {})

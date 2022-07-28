@@ -1,4 +1,3 @@
-import {test, expect, vi} from 'vitest'
 import '@durudex-web/api-server/start'
 
 import {resultOfUrql} from '@durudex-web/api/src/api-result'
