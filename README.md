@@ -17,11 +17,11 @@
 
 ## Modules
 
-- [`api`](packages/api): `@urql/core`-based client for Durudex API
+- [`api`](packages/api): `@urql/core`-based client for the Durudex API
+- [`api-server`](packages/test-api): tiny server that proxies Durudex Test API
 - [`app`](packages/app): SolidJS application
-- [`lib`](packages/lib): SolidJS extensions and utilities
+- [`solid-verba`](packages/lib): simplified SolidJS APIs and common utilities
 - [`form`](packages/form): object-oriented reactive forms with validation
-- [`test-api`](packages/test-api): tiny server that proxies Durudex Test API
 
 ## Develop
 
