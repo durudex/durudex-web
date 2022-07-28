@@ -15,7 +15,7 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Setter, Getter, createEffect} from '@durudex-web/lib'
+import {Setter, Getter, effect} from 'solid-verba'
 
 type Sink = Setter<string>
 type Validator = (sink: Sink) => void
@@ -24,7 +24,7 @@ type Validators = Validator | Validator[] | Validator[][]
 export function validate(sink: Sink, validators: Validators) {
   const fns = Array.isArray(validators) ? validators : [validators]
 
-  createEffect(() => {
+  effect(() => {
     for (const validate of fns.flat()) {
       let flushed = false
       validate(next => {

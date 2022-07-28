@@ -16,7 +16,7 @@
  */
 
 import {Link} from 'solid-app-router'
-import {createSignal} from '@durudex-web/lib'
+import {signal} from 'solid-verba'
 import {createForm, V, validate} from '@durudex-web/form'
 import paneBg from '$/assets/background/3.jpg'
 import {AuthScreen} from '$/auth/shared'
@@ -39,7 +39,7 @@ export function SignUp() {
     })
   )
 
-  const repeatPassword = createSignal<string>(dev ? 'xxxxxxxxx' : '')
+  const repeatPassword = signal<string>(dev ? 'xxxxxxxxx' : '')
 
   validate(username.error, V.username(username.value))
   validate(email.error, V.email(email.value))

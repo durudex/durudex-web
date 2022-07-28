@@ -1,7 +1,6 @@
 import '$/input/input.sass'
 
-import {Channel} from '@durudex-web/lib'
-import {WithChildren, WithClass, classes} from '$/props/props'
+import {Channel, WithChildren, WithClass, classes} from 'solid-verba'
 
 type InputBaseProps = WithClass & {label: string; error: string}
 type InputWrapperProps = InputBaseProps & WithChildren

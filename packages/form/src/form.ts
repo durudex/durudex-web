@@ -15,17 +15,11 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  Channel,
-  createSignal,
-  createLazyMemo,
-  log,
-  createEffect,
-} from '@durudex-web/lib'
+import {Channel, signal, memo} from 'solid-verba'
 
 export class Form<Schema extends {} = {}> {
   private fields = new Map<string, Field>()
-  pending = createSignal<boolean>(false)
+  pending = signal<boolean>(false)
 
   add<K extends keyof Schema>(key: K, value: Field<Schema[K]>) {
     this.fields.set(key as string, value)
@@ -40,7 +34,7 @@ export class Form<Schema extends {} = {}> {
     return val
   }
 
-  struct = createLazyMemo<Schema | null>(() => {
+  struct = memo<Schema | null>(() => {
     const obj: any = {}
 
     for (const key of this.fields.keys()) {
@@ -59,7 +53,7 @@ export class Form<Schema extends {} = {}> {
   assert(): Schema {
     const res = this.struct()
     if (res === null) throw new Error('Form is invalid')
-    return res!
+    return res
   }
 
   propagateErrors(rec: Record<string, string>) {
@@ -77,10 +71,10 @@ export class Form<Schema extends {} = {}> {
 
 export class Field<T = any> {
   value: Channel<T>
-  error = createSignal<string>('')
+  error = signal<string>('')
 
   constructor(private initial: T, public name: string = '') {
-    this.value = createSignal(initial)
+    this.value = signal(initial)
   }
 
   reset() {

@@ -1,4 +1,4 @@
-import {Setter, createSignal, createBool} from '@durudex-web/lib'
+import {Setter, signal} from 'solid-verba'
 import {showNotification} from '$/notifications/api'
 import {Submit} from '$/auth/submit/submit'
 
@@ -6,9 +6,9 @@ import {runWithOwner, Owner} from 'solid-js'
 
 export function enterVerificationCode(value: Setter<number>, owner: Owner) {
   return runWithOwner(owner, async () => {
-    const localValue = createSignal<number | null>(0)
-    const [pending] = createBool()
-    const [blocked] = createBool()
+    const localValue = signal<number | null>(0)
+    const pending = signal(false)
+    const blocked = signal(false)
 
     await showNotification(close => ({
       title: <h1>Verification Code</h1>,

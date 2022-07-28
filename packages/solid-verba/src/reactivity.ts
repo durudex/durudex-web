@@ -1,9 +1,4 @@
-import {
-  createSignal,
-  createEffect as effect,
-  createMemo as instantMemo,
-} from 'solid-js'
-import {createLazyMemo as memo} from '@solid-primitives/memo'
+import {createSignal} from 'solid-js'
 import {Getter, Setter, Channel, Defined, Comparator} from './types'
 
 export function channel<T extends Defined>(
@@ -22,22 +17,10 @@ export function signal<T extends Defined>(
   options: SignalOptions<T> = {}
 ) {
   const [get, set] = createSignal(initial, options) as any
-  return channel(get, set)
+  return channel(get, set) as Channel<T>
 }
 
-// function identity<T>(value: T) {
-//   return value
-// }
-
-// export function customSignal<T extends Defined>(
-//   initial: T,
-//   onGet: Mapper<T> = identity,
-//   onSet: Mapper<T> = identity,
-//   options: SignalOptions<T>
-// ) {
-//   const state = signal(initial, options)
-
-//   return channel(get, set)
-// }
-
-export {effect, memo, instantMemo}
+export {createEffect as effect, createMemo as instantMemo} from 'solid-js'
+export {createMutable as store} from 'solid-js/store'
+export {createLazyMemo as memo} from '@solid-primitives/memo'
+export {render, Show, For} from 'solid-js/web'

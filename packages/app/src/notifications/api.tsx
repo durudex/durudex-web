@@ -15,12 +15,10 @@
  * along with Durudex. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Element} from '$/props/props'
+import {Action, JsxElement} from 'solid-verba'
 import {NotificationProps, notifications} from '$/notifications/root'
 
-export type CloseFn = () => void
-
-export type NotificationConfig = (close: CloseFn) => NotificationProps
+export type NotificationConfig = (close: Action) => NotificationProps
 
 export async function showNotification(config: NotificationConfig) {
   let close = () => {}
@@ -33,7 +31,7 @@ export async function showNotification(config: NotificationConfig) {
   notifications.splice(notifications.indexOf(props))
 }
 
-function Dismiss(props: {close: CloseFn}) {
+function Dismiss(props: {close: Action}) {
   return (
     <button class="button full-width" onClick={props.close}>
       Dismiss
@@ -41,7 +39,7 @@ function Dismiss(props: {close: CloseFn}) {
   )
 }
 
-export function showMessage(title: string, body: Element) {
+export function showMessage(title: string, body: JsxElement) {
   return showNotification(close => ({
     title: <h3>{title}</h3>,
     body,
@@ -49,7 +47,7 @@ export function showMessage(title: string, body: Element) {
   }))
 }
 
-export function showError(body: Element) {
+export function showError(body: JsxElement) {
   return showNotification(close => ({
     title: <h3>Error</h3>,
     body,

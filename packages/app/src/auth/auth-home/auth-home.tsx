@@ -23,7 +23,7 @@ import bg from '$/assets/background/0.jpg'
 import {Link} from 'solid-app-router'
 
 import {AuthPage} from '$/auth/shared'
-import {useBodyStyle} from '$/use/body'
+import {useBodyStyle} from 'solid-verba'
 
 export function AuthHome() {
   useBodyStyle('--authHomeBackground', `url(${bg})`)

@@ -17,16 +17,15 @@
 
 import '$/notifications/root.sass'
 
-import {Element} from '$/props/props'
-import {createMutable, Show} from '@durudex-web/lib'
+import {JsxElement, Show, store} from 'solid-verba'
 
 export interface NotificationProps {
-  title: Element
-  body: Element
-  actions: Element
+  title: JsxElement
+  body: JsxElement
+  actions: JsxElement
 }
 
-export const notifications = createMutable<NotificationProps[]>([])
+export const notifications = store<NotificationProps[]>([])
 
 export function NotificationsRoot() {
   return (

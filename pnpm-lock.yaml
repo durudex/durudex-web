@@ -11,12 +11,10 @@ importers:
   packages/api:
     specifiers:
       '@durudex-web/form': '*'
-      '@durudex-web/lib': '*'
       '@urql/core': ^2.6.0
       graphql: ^16.5.0
     dependencies:
       '@durudex-web/form': link:../form
-      '@durudex-web/lib': link:../lib
       '@urql/core': 2.6.1_graphql@16.5.0
       graphql: 16.5.0
 
@@ -31,9 +29,8 @@ importers:
   packages/app:
     specifiers:
       '@durudex-web/api': '*'
-      '@durudex-web/api-server': workspace:^1.0.0
+      '@durudex-web/api-server': '*'
       '@durudex-web/form': '*'
-      '@durudex-web/lib': '*'
       '@fontsource/montserrat': ^4.5.11
       sass: ^1.53.0
       solid-app-router: ^0.4.1
@@ -47,7 +44,6 @@ importers:
       '@durudex-web/api': link:../api
       '@durudex-web/api-server': link:../api-server
       '@durudex-web/form': link:../form
-      '@durudex-web/lib': link:../lib
       '@fontsource/montserrat': 4.5.11
       sass: 1.54.0
       solid-app-router: 0.4.2_solid-js@1.4.8
@@ -60,17 +56,9 @@ importers:
 
   packages/form:
     specifiers:
-      '@durudex-web/lib': '*'
+      solid-verba: '*'
     dependencies:
-      '@durudex-web/lib': link:../lib
-
-  packages/lib:
-    specifiers:
-      '@solid-primitives/memo': ^1.0.0
-      solid-js: ^1.4.7
-    dependencies:
-      '@solid-primitives/memo': 1.0.0_solid-js@1.4.8
-      solid-js: 1.4.8
+      solid-verba: link:../solid-verba
 
   packages/solid-verba:
     specifiers:

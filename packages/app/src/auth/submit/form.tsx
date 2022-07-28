@@ -1,9 +1,8 @@
 import {Form} from '@durudex-web/form'
-import {Customizable} from '$/props/props'
-import {Awaitable} from '@durudex-web/lib'
+import {Awaitable, Container} from 'solid-verba'
 import {Submit} from '$/auth/submit/submit'
 
-type SubmitFormProps<Schema> = Customizable & {
+type SubmitFormProps<Schema> = Container & {
   form: Form<Schema>
   onSubmit: (data: Schema) => Awaitable
 }

@@ -22,10 +22,9 @@ import '@fontsource/montserrat/500.css'
 import '@fontsource/montserrat/600.css'
 import '@fontsource/montserrat/700.css'
 
-import {render} from 'solid-js/web'
+import {render, lazyModule} from 'solid-verba'
 import {Router, Routes, Route} from 'solid-app-router'
 import {NotificationsRoot} from '$/notifications/root'
-import {lazyModule} from '$/lazy-module/lazy-module'
 
 import {showError} from '$/notifications/api'
 import {config} from '@durudex-web/api'

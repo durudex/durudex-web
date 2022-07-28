@@ -1,5 +1,6 @@
-import {onMount, onCleanup} from 'solid-js'
+import {onMount, onCleanup, getOwner, Owner, runWithOwner} from 'solid-js'
 import {delay, interval} from './timers'
+import {Getter} from './types'
 
 export function useBodyClass(...tokens: string[]) {
   onMount(() => document.body.classList.add(...tokens))
@@ -17,6 +18,12 @@ export function useDelay(ms: number) {
 
 export function useInterval(ms: number, fn: () => boolean) {
   return interval(ms, fn, onCleanup)
+}
+
+export function useOwner() {
+  const owner = getOwner()
+  if (!owner) throw new Error('No owner')
+  return <T>(fn: Getter<T>) => runWithOwner(owner, fn)
 }
 
 export {onMount, onCleanup}

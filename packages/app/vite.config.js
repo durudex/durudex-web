@@ -32,7 +32,7 @@ const relative = dir => resolve(process.cwd(), dir)
 const preview = Boolean(process.env.BUILD_PREVIEW)
 
 export default defineConfig({
-  plugins: [solid(), checker({typescript: true})],
+  plugins: [solid(), checker({typescript: true, terminal: false})],
   build: {
     minify: preview ? false : 'esbuild',
   },

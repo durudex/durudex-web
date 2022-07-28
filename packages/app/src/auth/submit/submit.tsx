@@ -1,17 +1,25 @@
-import {Getter, Awaitable, delay, createSignal} from '@durudex-web/lib'
-import {Customizable, classes} from '$/props/props'
+import {
+  Container,
+  classes,
+  Getter,
+  Awaitable,
+  useDelay,
+  useOwner,
+} from 'solid-verba'
 
-type SubmitBaseProps = Customizable & {
+type SubmitBaseProps = Container & {
   blocked?: boolean
   pending?: Getter<boolean>
   onSubmit: () => Awaitable
 }
 
 export function Submit(props: SubmitBaseProps) {
+  const run = useOwner()
+
   async function onClick() {
     if (props.blocked) return
     await props.onSubmit()
-    if (import.meta.env.DEV) await delay(500)
+    if (import.meta.env.DEV) await run(() => useDelay(500))
   }
 
   return (

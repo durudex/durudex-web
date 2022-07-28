@@ -17,22 +17,19 @@
 
 import '$/auth/shared.sass'
 
-import {useBodyClass, useBodyStyle} from '$/use/body'
-import {WithChildren, WithClass, classes} from '$/props/props'
+import {useBodyClass, useBodyStyle, Container, classes} from 'solid-verba'
 import durudexLogo from '$/assets/logo.png'
 
 const GRADIENT = 'linear-gradient(245.03deg, #9D1CED 8.14%, #1C24ED 92.58%)'
 
-type AuthPageProps = WithChildren & WithClass
-
-export function AuthPage(props: AuthPageProps) {
+export function AuthPage(props: Container) {
   useBodyClass('withAuthPage')
   useBodyStyle('background', GRADIENT)
 
   return <div class={classes(props, 'authPage')}>{props.children}</div>
 }
 
-type AuthScreenProps = AuthPageProps & {
+type AuthScreenProps = Container & {
   title: string
   paneLeftwards: boolean
   paneSrc: string

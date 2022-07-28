@@ -8,9 +8,8 @@
   },
   "dependencies": {
     "@durudex-web/api": "*",
-    "@durudex-web/api-server": "workspace:^1.0.0",
+    "@durudex-web/api-server": "*",
     "@durudex-web/form": "*",
-    "@durudex-web/lib": "*",
     "@fontsource/montserrat": "^4.5.11",
     "sass": "^1.53.0",
     "vite": "^3.0.2",
