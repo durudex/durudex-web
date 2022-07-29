@@ -1,8 +1,9 @@
 import {Comparator} from './types'
+// import {memo} from './reactivity'
 
-const w = Object.assign(window, {__forceDebugInProd: false})
+const w = Object.assign(globalThis, {__forceDebugInProd: false})
 
-type Decorator<Host, T> = (
+type Decorator<Host = object, T = any> = (
   target: Host,
   property: string,
   descriptor: TypedPropertyDescriptor<T>
@@ -48,11 +49,27 @@ export function log<Host extends object>(
   }
 }
 
-// todo:
-// export function memoize<Host, Result>(
-//   compare?: Comparator<Result>
-// ): Decorator<Host, () => Result> {
-//   return (_target, _property, descriptor) => {
+// does not work:
+// export function memoize<T>(equals?: Comparator<T>): Decorator {
+//   return (_target, property, descriptor: TypedPropertyDescriptor<() => T>) => {
 //     const backup = descriptor.value!
+
+//     const instances = new WeakMap<object, Map<string, () => any>>()
+
+//     descriptor.value = function (this: object) {
+//       let methodsMap = instances.get(this)
+//       if (methodsMap === undefined) {
+//         methodsMap = new Map()
+//         instances.set(this, methodsMap)
+//       }
+
+//       let method = methodsMap.get(property)
+//       if (method === undefined) {
+//         method = memo(backup.bind(this), undefined, {})
+//         methodsMap.set(property, method)
+//       }
+
+//       return method()
+//     }
 //   }
 // }

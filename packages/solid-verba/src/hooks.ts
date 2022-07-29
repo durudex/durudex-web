@@ -1,4 +1,4 @@
-import {onMount, onCleanup, getOwner, Owner, runWithOwner} from 'solid-js'
+import {onMount, onCleanup, getOwner, runWithOwner} from 'solid-js'
 import {delay, interval} from './timers'
 import {Getter} from './types'
 

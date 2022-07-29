@@ -12,15 +12,16 @@ interface SignalOptions<T> {
   equals?: Comparator<T>
 }
 
-export function signal<T extends Defined>(
-  initial: T,
-  options: SignalOptions<T> = {}
-) {
-  const [get, set] = createSignal(initial, options) as any
-  return channel(get, set) as Channel<T>
+export function signal<T>(initial: T, options: SignalOptions<T> = {}) {
+  const [get, set] = createSignal(initial, options)
+  return channel<T>(get, set as any)
 }
 
-export {createEffect as effect, createMemo as instantMemo} from 'solid-js'
+export {
+  createRoot,
+  createEffect as effect,
+  createMemo as instantMemo,
+} from 'solid-js'
 export {createMutable as store} from 'solid-js/store'
 export {createLazyMemo as memo} from '@solid-primitives/memo'
 export {render, Show, For} from 'solid-js/web'
