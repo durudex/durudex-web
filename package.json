@@ -4,12 +4,14 @@
   "private": true,
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "prepare": "husky install",
     "dev": "pnpm -C packages/app dev",
     "build": "pnpm -C packages/app build",
     "test": "vitest --run",
     "test:watch": "vitest"
   },
   "dependencies": {
+    "husky": "^8.0.1",
     "vitest": "^0.18.1"
   }
 }
