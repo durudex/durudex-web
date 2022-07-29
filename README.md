@@ -27,8 +27,10 @@
 
 1. Clone this repo
 2. Install deps: `pnpm install --recursive`
-3. Start development server (in packages/app): `vite`
-4. Build app: `vite build`
+3. Develop: `pnpm dev`
+4. Build: `pnpm build`
+5. Run tests once: `pnpm test`
+6. Run tests in the watch mode: `pnpm test:watch`
 
 ## ⚠️ License
 
